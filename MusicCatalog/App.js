@@ -1,40 +1,22 @@
 
 import React from 'react';
+import { Navigation } from 'react-native-navigation';
+import {StyleSheet,Text,View,Button} from 'react-native';
 
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {HomeScreen} from './src/modules/HomeScreen'
 
 
 
-const App = () =>  {
+const App = (props) =>  {
   
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Hello</Text>
-    </View>
+    <HomeScreen/>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-   flex:1,
-   justifyContent:'center',
-   alignItems:'center',
-   backgroundColor:'black',
-  },
-  text:{
-    color: 'yellow',
-    fontSize:20,
-  }
-
+  
 });
 
 export default App;
