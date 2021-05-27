@@ -29,7 +29,7 @@ Navigation.setDefaultOptions({
   },
 });
 
-HomeScreen.options = {
+ArtistsScreen.options = {
   topBar: {
     title: {
       text: 'Artists',
@@ -40,7 +40,7 @@ HomeScreen.options = {
   },
 };
 
-SettingsScreen.options = {
+AlbumsScreen.options = {
   topBar: {
     title: {
       text: 'Albums',
