@@ -20,7 +20,7 @@ Navigation.setDefaultOptions({
       color: colors.WHITE,
     },
     background: {
-      color: colors.BRIGHT_GRAY,
+      color: colors.PURPLE,
     },
     bottomTab: {
       fontSize: 16,

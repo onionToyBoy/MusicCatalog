@@ -16,7 +16,7 @@ export const SearchBar = () => {
 }
 const styles = StyleSheet.create({
     container: {
-      backgroundColor: colors.MIDDLE_GRAY,
+      //backgroundColor: colors.MIDDLE_GRAY,
       minHeight:40,
       marginVertical:10,
     },
@@ -25,5 +25,6 @@ const styles = StyleSheet.create({
         borderColor: colors.BRIGHT_GRAY,
         flex: 1,
         color: colors.WHITE,
+        paddingHorizontal:15,
       },
   });

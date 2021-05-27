@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.DARK_GRAY,
   },
   text: {
-    color: colors.YELLOW,
+    color: colors.GOLD,
     fontSize: 20,
   },
 });

@@ -2,13 +2,13 @@ import React, {useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   FlatList,
-  Text,
   View,
   StyleSheet,
 } from 'react-native';
 import { SearchBar } from '../../components/SearchBar';
 
 import {colors} from '../../constants/colors';
+import { Artist } from './components/Artist';
 
 export const ArtistsScreen = () => {
   const [isLoading, setLoading] = useState(true);
@@ -26,7 +26,7 @@ export const ArtistsScreen = () => {
 
   useEffect(() => {
     fetch(
-      'https://itunes.apple.com/search?term=artists&media=music&entity=musicArtist&limit=20',
+      'https://itunes.apple.com/search?term=artists&media=music&entity=musicArtist&limit=15',
     )
       .then(response => response.json())
       .then(json => setData(json.results.filter(item => itemCheck(item))))
@@ -44,9 +44,7 @@ export const ArtistsScreen = () => {
           data={data}
           keyExtractor={item => item.artistId}
           renderItem={({item}) => (
-            <Text style={styles.text}>
-              {item.artistName}, {item.primaryGenreName}
-            </Text>
+            <Artist name={item.artistName} genre={item.primaryGenreName} />
           )}
         />
       )}
@@ -58,10 +56,5 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 5,
     backgroundColor: colors.DARK_GRAY,
-  },
-  text: {
-    color: colors.YELLOW,
-    fontSize: 15,
-    marginVertical: 10,
   },
 });
