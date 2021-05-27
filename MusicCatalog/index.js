@@ -1,51 +1,55 @@
 import {Navigation} from 'react-native-navigation';
 import App from './App';
 
-import {HomeScreen} from './src/modules/HomeScreen';
-import {SettingsScreen} from './src/modules/SettingsScreen';
+import {ArtistsScreen} from './src/modules/1/ArtistsScreen';
+import {AlbumsScreen} from './src/modules/2/AlbumsScreen';
+import {colors} from './src/constants/colors'
 
-Navigation.registerComponent('Home', () => HomeScreen);
-Navigation.registerComponent('Settings', () => SettingsScreen);
+Navigation.registerComponent('Artists', () => ArtistsScreen);
+Navigation.registerComponent('Albums', () => AlbumsScreen);
 
 Navigation.setDefaultOptions({
   statusBar: {
-    backgroundColor: 'purple'
+    backgroundColor: colors.BRIGHT_GRAY,
   },
   topBar: {
     title: {
-      color: 'yellow'
+      color: colors.WHITE,
     },
     backButton: {
-      color: 'yellow'
+      color: colors.WHITE,
     },
     background: {
-      color: 'purple'
+      color: colors.BRIGHT_GRAY,
     },
-  }
+    bottomTab: {
+      fontSize: 16,
+      selectedFontSize: 14,
+    },
+  },
 });
 
 HomeScreen.options = {
   topBar: {
     title: {
-      text: 'Artists'
-    }
+      text: 'Artists',
+    },
   },
   bottomTab: {
-    text: 'Artists'
-  }
+    text: 'Artists',
+  },
 };
 
 SettingsScreen.options = {
   topBar: {
     title: {
-      text: 'Albums'
-    }
+      text: 'Albums',
+    },
   },
   bottomTab: {
-    text: 'Albums'
-  }
+    text: 'Albums',
+  },
 };
-
 
 Navigation.events().registerAppLaunchedListener(async () => {
   Navigation.setRoot({
@@ -57,25 +61,25 @@ Navigation.events().registerAppLaunchedListener(async () => {
               children: [
                 {
                   component: {
-                    name: 'Home'
+                    name: 'Artists',
                   },
                 },
-              ]
-            }
+              ],
+            },
           },
           {
             stack: {
               children: [
                 {
                   component: {
-                    name: 'Settings'
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }
+                    name: 'Albums',
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
   });
 });
