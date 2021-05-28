@@ -1,10 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  View,
-  StyleSheet,
-} from 'react-native';
+import {ActivityIndicator, FlatList, View, StyleSheet} from 'react-native';
 import {SearchBar} from '../../components/SearchBar';
 
 import {colors} from '../../constants/colors';
@@ -13,12 +8,12 @@ import {Artist} from './components/Artist';
 export const ArtistsScreen = () => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [searchValue,setSearchValue]= useState('artist');
+  const [searchValue, setSearchValue] = useState('artists');
 
   const tmpArray = [];
 
   const itemCheck = item => {
-    if (tmpArray.indexOf(item.artistName) === -1) { 
+    if (tmpArray.indexOf(item.artistName) === -1) {
       tmpArray.push(item.artistName);
       return true;
     }
@@ -26,11 +21,12 @@ export const ArtistsScreen = () => {
   };
 
   useEffect(() => {
-    if(searchValue.trim() ===''){
-      setSearchValue('artist')
+    if (searchValue.trim() === '') {
+      setSearchValue('artists');
     }
+
     fetch(
-      `https://itunes.apple.com/search?term=${searchValue}s&media=music&entity=musicArtist&country=by&limit=15`,
+      `https://itunes.apple.com/search?term=${searchValue}&media=music&entity=musicArtist&country=by&limit=15`,
     )
       .then(response => response.json())
       .then(json => setData(json.results.filter(item => itemCheck(item))))
@@ -42,11 +38,11 @@ export const ArtistsScreen = () => {
     alert(name);
   };
 
-  const searchArtist = (text)=>setSearchValue(text);
+  const searchArtist = text => setSearchValue(text);
 
   return (
     <View style={styles.container}>
-      <SearchBar onSearch={searchArtist} value={searchValue}/>
+      <SearchBar onSearch={searchArtist} value={searchValue} />
       {isLoading ? (
         <ActivityIndicator />
       ) : (

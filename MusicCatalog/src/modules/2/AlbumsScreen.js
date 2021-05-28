@@ -27,7 +27,7 @@ export const AlbumsScreen = () => {
       setSearchValue('radiohead')
     }
     fetch(
-      `https://itunes.apple.com/search?term=${searchValue}&media=music&entity=album&country=by&limit=15`,
+      `https://itunes.apple.com/search?term=${searchValue}&media=music&entity=album&limit=15`,
     )
       .then(response => response.json())
       .then(json => setData(json.results))
