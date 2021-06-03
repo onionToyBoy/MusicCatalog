@@ -1,5 +1,6 @@
 import { Navigation } from 'react-native-navigation';
 import { colors } from '../constants/colors';
+import { routes } from '../constants/routes';
 
 Navigation.setDefaultOptions({
   statusBar: {
@@ -33,7 +34,7 @@ export const RootNavigation = () => {
                 children: [
                   {
                     component: {
-                      name: 'Artists',
+                      name: routes.Artists,
                       options: {
                         topBar: {
                           title: {
@@ -54,7 +55,7 @@ export const RootNavigation = () => {
                 children: [
                   {
                     component: {
-                      name: 'Albums',
+                      name: routes.Albums,
                       options: {
                         topBar: {
                           title: {
