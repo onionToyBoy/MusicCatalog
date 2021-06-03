@@ -3,7 +3,7 @@ import {View, StyleSheet, TextInput} from 'react-native';
 
 import {colors} from '../constants/colors';
 
-export const SearchBar = ({onSearch,value}) => {
+export const SearchBar = ({onSearch}) => {
   return (
     <View style={styles.container}>
       <TextInput

@@ -1,85 +1,15 @@
 import {Navigation} from 'react-native-navigation';
-import App from './App';
 
-import {ArtistsScreen} from './src/modules/1/ArtistsScreen';
-import {AlbumsScreen} from './src/modules/2/AlbumsScreen';
-import {colors} from './src/constants/colors'
+import {ArtistsScreen} from './src/modules/Artists/ArtistsScreen';
+import {AlbumsScreen} from './src/modules/Albums/AlbumsScreen';
+import {ReduxProvider} from './src/store/ReduxProvider';
+import {RootNavigation} from './src/navigation/RootNavigation';
+if (__DEV__) {
+  import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
+}
 
-Navigation.registerComponent('Artists', () => ArtistsScreen);
-Navigation.registerComponent('Albums', () => AlbumsScreen);
+Navigation.registerComponent('Artists', () => ReduxProvider(ArtistsScreen));
 
-Navigation.setDefaultOptions({
-  statusBar: {
-    backgroundColor: colors.BRIGHT_GRAY,
-  },
-  topBar: {
-    title: {
-      color: colors.WHITE,
-    },
-    backButton: {
-      color: colors.WHITE,
-    },
-    background: {
-      color: colors.PURPLE,
-    },
-    bottomTab: {
-      fontSize: 16,
-      selectedFontSize: 14,
-    },
-  },
-});
+Navigation.registerComponent('Albums', () => ReduxProvider(AlbumsScreen));
 
-ArtistsScreen.options = {
-  topBar: {
-    title: {
-      text: 'Artists',
-    },
-  },
-  bottomTab: {
-    text: 'Artists',
-  },
-};
-
-AlbumsScreen.options = {
-  topBar: {
-    title: {
-      text: 'Albums',
-    },
-  },
-  bottomTab: {
-    text: 'Albums',
-  },
-};
-
-Navigation.events().registerAppLaunchedListener(async () => {
-  Navigation.setRoot({
-    root: {
-      bottomTabs: {
-        children: [
-          {
-            stack: {
-              children: [
-                {
-                  component: {
-                    name: 'Artists',
-                  },
-                },
-              ],
-            },
-          },
-          {
-            stack: {
-              children: [
-                {
-                  component: {
-                    name: 'Albums',
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  });
-});
+Navigation.events().registerAppLaunchedListener(RootNavigation());

@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
   },
   bracket: {
     color: colors.BRIGHT_GRAY,
-    fontSize: 35,
+    fontSize: 30,
+    marginRight:5,
   },
   price:{
     fontSize: 17,

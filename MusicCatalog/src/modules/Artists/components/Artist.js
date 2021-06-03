@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
   },
   bracket: {
     color: colors.BRIGHT_GRAY,
-    fontSize: 35,
+    fontSize: 30,
+    marginRight:3,
   },
   rightSIde: {
     flex: 1,
