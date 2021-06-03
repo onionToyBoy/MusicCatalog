@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, FlatList, View, StyleSheet} from 'react-native';
-import {SearchBar} from '../../components/SearchBar';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, FlatList, View, StyleSheet } from 'react-native';
+import { SearchBar } from '../../components/SearchBar';
+import { useDispatch, useSelector } from 'react-redux';
 
-import {colors} from '../../constants/colors';
-import {Artist} from './components/Artist';
-import {selectArtists} from './selectors';
-import {searchArtist} from './thunks';
+import { colors } from '../../constants/colors';
+import { Artist } from './components/Artist';
+import { selectArtists } from './selectors';
+import { searchArtist } from './thunks';
 import { searchChanged } from './actions/searchChanged';
 
 export const ArtistsScreen = () => {
@@ -42,19 +42,14 @@ export const ArtistsScreen = () => {
   return (
     <View style={styles.container}>
       <SearchBar onSearch={searching} />
-    
-        <FlatList
-          data={artists}
-          keyExtractor={item => item.artistId}
-          renderItem={({item}) => (
-            <Artist
-              name={item.artistName}
-              genre={item.primaryGenreName}
-              openAlbums={openAlbums}
-            />
-          )}
-        />
-     
+
+      <FlatList
+        data={artists}
+        keyExtractor={item => item.artistId}
+        renderItem={({ item }) => (
+          <Artist name={item.artistName} genre={item.primaryGenreName} openAlbums={openAlbums} />
+        )}
+      />
     </View>
   );
 };

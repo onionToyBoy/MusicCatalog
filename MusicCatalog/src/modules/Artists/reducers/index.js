@@ -1,10 +1,10 @@
-import {SEARCH_ARTISTS} from '../../../constants/types';
+import { SEARCH_ARTISTS } from '../../../constants/types';
 
 const INITIAL_STATE = {
   artists: [],
 };
 
-export const SearchReducer = (state = INITIAL_STATE, action) => {
+export const artists = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SEARCH_ARTISTS:
       return {

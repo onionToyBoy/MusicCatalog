@@ -1,6 +1,5 @@
-import {Navigation} from 'react-native-navigation';
+import { Navigation } from 'react-native-navigation';
 import { colors } from '../constants/colors';
-
 
 Navigation.setDefaultOptions({
   statusBar: {

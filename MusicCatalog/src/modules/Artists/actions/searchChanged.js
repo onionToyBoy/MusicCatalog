@@ -1,4 +1,4 @@
-import {SEARCH_ARTISTS} from '../../../constants/types';
+import { SEARCH_ARTISTS } from '../../../constants/types';
 
 export const searchChanged = artists => {
   return {

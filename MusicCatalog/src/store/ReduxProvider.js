@@ -1,6 +1,6 @@
 import React from 'react';
-import {Provider} from 'react-redux';
-import {store} from './store'
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 export const ReduxProvider = Component => {
   return props => (
@@ -9,4 +9,3 @@ export const ReduxProvider = Component => {
     </Provider>
   );
 };
- 

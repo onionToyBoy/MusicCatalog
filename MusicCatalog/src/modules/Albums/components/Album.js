@@ -1,17 +1,14 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity, Text,Dimensions,Image} from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text, Dimensions, Image } from 'react-native';
 
-import {colors} from '../../../constants/colors';
-import {symbols} from '../../../constants/symbols';
+import { colors } from '../../../constants/colors';
+import { symbols } from '../../../constants/symbols';
 
-export const Album = ({artistName, collectionName, cover,collectionPrice}) => {
+export const Album = ({ artistName, collectionName, cover, collectionPrice }) => {
   return (
     <TouchableOpacity style={styles.container}>
       <View style={styles.leftSide}>
-          <Image
-          style={styles.image}
-              source={{uri:cover}}
-          />
+        <Image style={styles.image} source={{ uri: cover }} />
         <View>
           <Text style={styles.title}>{collectionName}</Text>
           <Text style={styles.subtitle}>{artistName}</Text>
@@ -33,20 +30,20 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 15,
     backgroundColor: colors.MIDDLE_GRAY,
-    width:windowWidth,
+    width: windowWidth,
     borderBottomColor: colors.BRIGHT_GRAY,
     borderBottomWidth: 2,
   },
-  rightSIde:{
+  rightSIde: {
     flexDirection: 'row',
-    flex:1,
-    justifyContent:'flex-end',
-    alignItems:'center'
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
-  leftSide:{
-    flex:1,
-    flexDirection:'row',
-    alignItems:'center',
+  leftSide: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   title: {
     color: colors.WHITE,
@@ -59,17 +56,17 @@ const styles = StyleSheet.create({
   bracket: {
     color: colors.BRIGHT_GRAY,
     fontSize: 30,
-    marginRight:5,
+    marginRight: 5,
   },
-  price:{
+  price: {
     fontSize: 17,
     color: colors.GOLD,
-    marginRight:5,
+    marginRight: 5,
   },
-  image:{
-      justifyContent:'center',
-      minWidth: 60,
-      minHeight: 60,
-      marginRight:10,
-  }
+  image: {
+    justifyContent: 'center',
+    minWidth: 60,
+    minHeight: 60,
+    marginRight: 10,
+  },
 });

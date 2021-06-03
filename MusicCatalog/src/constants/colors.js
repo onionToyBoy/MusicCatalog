@@ -4,5 +4,5 @@ export const colors = {
   BRIGHT_GRAY: '#505050',
   WHITE: '#FFFFFF',
   GOLD: '#CCA700',
-  PURPLE:'#573D59',
+  PURPLE: '#573D59',
 };
