@@ -1,15 +1,15 @@
 import React from 'react';
-import {View, StyleSheet, TextInput} from 'react-native';
+import { View, StyleSheet, TextInput } from 'react-native';
 
-import {colors} from '../constants/colors';
+import { colors } from '../constants/colors';
 
-export const SearchBar = ({onSearch}) => {
+export const SearchBar = ({ onSearch }) => {
   return (
     <View style={styles.container}>
       <TextInput
         onChangeText={onSearch}
         style={styles.input}
-        placeholder="Введите текст..."
+        placeholder='Введите текст...'
         placeholderTextColor={colors.BRIGHT_GRAY}
       />
     </View>
