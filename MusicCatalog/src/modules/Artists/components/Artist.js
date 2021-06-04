@@ -1,17 +1,12 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
-import {colors} from '../../../constants/colors';
-import {symbols} from '../../../constants/symbols';
+import { colors } from '../../../constants/colors';
+import { symbols } from '../../../constants/symbols';
 
-export const Artist = ({name, genre, openAlbums}) => {
+export const Artist = ({ name, genre, openAlbums, id }) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={() => openAlbums(name)}>
+    <TouchableOpacity style={styles.container} onPress={() => openAlbums(name, id)}>
       <View style={styles.leftSide}>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.gerne}>{genre}</Text>
@@ -43,12 +38,12 @@ const styles = StyleSheet.create({
   bracket: {
     color: colors.BRIGHT_GRAY,
     fontSize: 30,
-    marginRight:3,
+    marginRight: 3,
   },
   rightSIde: {
     flex: 1,
     justifyContent: 'center',
-    alignItems:'flex-end',
+    alignItems: 'flex-end',
   },
   leftSide: {
     flex: 1,

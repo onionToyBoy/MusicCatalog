@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, View, StyleSheet } from 'react-native';
 import { SearchBar } from '../../components/SearchBar';
 import { useDispatch, useSelector } from 'react-redux';
+import { Navigation } from 'react-native-navigation';
 
 import { colors } from '../../constants/colors';
 import { Artist } from './components/Artist';
 import { selectArtists } from './selectors';
 import { searchArtist } from './thunks';
-import { searchChanged } from './actions/searchChanged';
 
-export const ArtistsScreen = () => {
+export const ArtistsScreen = ({ componentId }) => {
   //const [isLoading, setLoading] = useState(true);
   const [searchValue, setSearchValue] = useState('artists');
 
@@ -31,8 +31,20 @@ export const ArtistsScreen = () => {
     dispatch(searchArtist(searchValue));
   }, [searchValue]);
 
-  const openAlbums = name => {
-    alert(name);
+  const openAlbums = (name, id) => {
+    Navigation.push(componentId, {
+      component: {
+        name: 'ArtistsAlbums',
+        id: id,
+        options: {
+          topBar: {
+            title: {
+              text: name+' albums',
+            },
+          },
+        },
+      },
+    });
   };
 
   const searching = text => {
@@ -47,7 +59,12 @@ export const ArtistsScreen = () => {
         data={artists}
         keyExtractor={item => item.artistId}
         renderItem={({ item }) => (
-          <Artist name={item.artistName} genre={item.primaryGenreName} openAlbums={openAlbums} />
+          <Artist
+            name={item.artistName}
+            genre={item.primaryGenreName}
+            openAlbums={openAlbums}
+            id={item.artistId}
+          />
         )}
       />
     </View>

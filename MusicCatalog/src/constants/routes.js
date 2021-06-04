@@ -1,4 +1,4 @@
 export const routes = {
-    Artists: 'Artists',
-    Albums: 'Albums',
-  };
+  Artists: 'Artists',
+  Albums: 'Albums',
+};
