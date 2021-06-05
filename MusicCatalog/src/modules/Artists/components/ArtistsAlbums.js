@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, StyleSheet, Text, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { Navigation } from 'react-native-navigation';
 
 import { colors } from '../../../constants/colors';
 import { selectAlbums } from '../selectors';
@@ -18,13 +19,31 @@ export const ArtistsAlbums = ({ componentId }) => {
     dispatch(getAlbums(componentId));
   }, []);
 
+  const openTracks = (artistName, albumNane, id) => {
+    Navigation.push(componentId, {
+      component: {
+        name: 'AlbumTracks',
+        id: id,
+        options: {
+          topBar: {
+            title: {
+              text: albumNane ,
+            },
+          },
+        },
+      },
+    });
+  };
+
   return (
     <View style={styles.container}>
       <FlatList
-        data={albums? albums.slice(1) : albums}
+        data={albums ? albums.slice(1) : albums}
         keyExtractor={item => item.collectionId}
         renderItem={({ item }) => (
           <Album
+            id={item.collectionId}
+            openTracks={openTracks}
             artistName={item.artistName}
             collectionName={item.collectionName}
             cover={item.artworkUrl60}
@@ -40,11 +59,5 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.DARK_GRAY,
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    color: colors.GOLD,
-    fontSize: 30,
   },
 });

@@ -4,9 +4,9 @@ import { View, StyleSheet, TouchableOpacity, Text, Dimensions, Image } from 'rea
 import { colors } from '../../../constants/colors';
 import { symbols } from '../../../constants/symbols';
 
-export const Album = ({ artistName, collectionName, cover, collectionPrice }) => {
+export const Album = ({ artistName, collectionName, cover, collectionPrice , openTracks,id}) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={() => openTracks(artistName,collectionName, id)}>
       <View style={styles.leftSide}>
         <Image style={styles.image} source={{ uri: cover }} />
         <View>
