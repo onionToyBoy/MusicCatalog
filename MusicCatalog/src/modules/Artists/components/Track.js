@@ -4,6 +4,13 @@ import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { colors } from '../../../constants/colors';
 
 export const Track = ({ name, number, time }) => {
+
+  function timeConventer(millis) {
+    let minutes = Math.floor(millis / 60000);
+    let seconds = ((millis % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+  }
+
   return (
     <TouchableOpacity style={styles.container}>
       <View style={styles.leftSide}>
@@ -11,7 +18,7 @@ export const Track = ({ name, number, time }) => {
         <Text style={styles.name}>{name}</Text>
       </View>
       <View style={styles.rightSIde}>
-        <Text style={styles.numbers}>{time}</Text>
+        <Text style={styles.numbers}>{timeConventer(time)}</Text>
       </View>
     </TouchableOpacity>
   ); 
@@ -29,12 +36,12 @@ const styles = StyleSheet.create({
   },
   name: {
     color: colors.WHITE,
-    fontSize: 20,
+    fontSize: 22,
     marginLeft: 10,
   },
   numbers: {
     color: colors.GOLD,
-    fontSize: 22,
+    fontSize: 20,
   },
   rightSIde: {
     flex: 1,
@@ -43,7 +50,7 @@ const styles = StyleSheet.create({
   },
   leftSide: {
     flexDirection: 'row',
-    flex: 2,
+    flex: 3,
     alignItems: 'center',
   },
 });
