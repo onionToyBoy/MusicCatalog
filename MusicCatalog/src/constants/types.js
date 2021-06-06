@@ -1,3 +1,5 @@
 export const SEARCH_ARTISTS = 'SEARCH_ARTISTS';
 
 export const SEARCH_ALBUMS = 'SEARCH_ALBUMS';
+
+export const SEARCH_TRACKS = 'SEARCH_TRACKS';

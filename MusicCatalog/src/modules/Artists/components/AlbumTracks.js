@@ -15,7 +15,7 @@ export const AlbumTracks = ({ componentId }) => {
         .catch(error => console.error(error))
     }, []);
   
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   //const albums = useSelector(selectAlbums);
 
