@@ -2,14 +2,9 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
 import { colors } from '../../../constants/colors';
+import { timeConventer } from '../../../utils/timeConventer';
 
 export const Track = ({ name, number, time }) => {
-
-  function timeConventer(millis) {
-    let minutes = Math.floor(millis / 60000);
-    let seconds = ((millis % 60000) / 1000).toFixed(0);
-    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-  }
 
   return (
     <TouchableOpacity style={styles.container}>
