@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet, Text, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 
 import { colors } from '../../../constants/colors';
 import { selectAlbums } from '../selectors';
-import { moveToAlbums } from '../actions/moveToAlbums';
-import { getSpecificAlbums } from '../../../requests/getSpecificAlbums';
 import { getAlbums } from '../thunks';
 import { Album } from '../../Albums/components/Album';
 
@@ -27,7 +25,7 @@ export const ArtistsAlbums = ({ componentId }) => {
         options: {
           topBar: {
             title: {
-              text: albumNane ,
+              text: albumNane,
             },
           },
         },
