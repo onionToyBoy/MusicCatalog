@@ -7,6 +7,7 @@ import { colors } from '../../../constants/colors';
 import { selectAlbums } from '../selectors';
 import { getAlbums } from '../thunks';
 import { Album } from '../../Albums/components/Album';
+import { checkPrice } from '../../../utils/checkPrice';
 
 export const ArtistsAlbums = ({ componentId }) => {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ export const ArtistsAlbums = ({ componentId }) => {
             artistName={item.artistName}
             collectionName={item.collectionName}
             cover={item.artworkUrl60}
-            collectionPrice={item.collectionPrice}
+            collectionPrice={checkPrice(item.collectionPrice)}
           />
         )}
       />

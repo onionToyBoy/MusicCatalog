@@ -15,7 +15,7 @@ export const Album = ({ artistName, collectionName, cover, collectionPrice , ope
         </View>
       </View>
       <View style={styles.rightSIde}>
-        <Text style={styles.price}>{collectionPrice} $</Text>
+        <Text style={styles.price}>{collectionPrice}</Text>
         <Text style={styles.bracket}>{symbols.RIGHT_ANGULAR_BRACKET}</Text>
       </View>
     </TouchableOpacity>
