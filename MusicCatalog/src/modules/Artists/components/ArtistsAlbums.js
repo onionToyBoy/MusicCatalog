@@ -8,6 +8,7 @@ import { selectAlbums } from '../selectors';
 import { getAlbums } from '../thunks';
 import { Album } from '../../Albums/components/Album';
 import { checkPrice } from '../../../utils/checkPrice';
+import { toTracks } from '../../../navigation/toTracks';
 
 export const ArtistsAlbums = ({ componentId }) => {
   const dispatch = useDispatch();
@@ -18,22 +19,6 @@ export const ArtistsAlbums = ({ componentId }) => {
     dispatch(getAlbums(componentId));
   }, []);
 
-  const openTracks = (artistName, albumNane, id) => {
-    Navigation.push(componentId, {
-      component: {
-        name: 'AlbumTracks',
-        id: id,
-        options: {
-          topBar: {
-            title: {
-              text: albumNane,
-            },
-          },
-        },
-      },
-    });
-  };
-
   return (
     <View style={styles.container}>
       <FlatList
@@ -42,11 +27,12 @@ export const ArtistsAlbums = ({ componentId }) => {
         renderItem={({ item }) => (
           <Album
             id={item.collectionId}
-            openTracks={openTracks}
+            openTracks={toTracks}
             artistName={item.artistName}
             collectionName={item.collectionName}
             cover={item.artworkUrl60}
             collectionPrice={checkPrice(item.collectionPrice)}
+            componentId={componentId}
           />
         )}
       />
