@@ -3,12 +3,12 @@ import { ActivityIndicator, FlatList, View, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 
-import { colors } from '../../constants/colors';
-import { Artist } from './components/Artist';
-import { selectArtists } from './selectors';
-import { searchArtist } from './thunks';
-import { routes } from '../../constants/routes';
-import { SearchBar } from '../../components/SearchBar';
+import { colors } from '../../../constants/colors';
+import { Artist } from './Artist';
+import { selectArtists } from '../selectors';
+import { searchArtist } from '../thunks';
+import { routes } from '../../../constants/routes';
+import { SearchBar } from '../../../components/SearchBar';
 
 export const ArtistsScreen = ({ componentId }) => {
   const [searchValue, setSearchValue] = useState('artists');
