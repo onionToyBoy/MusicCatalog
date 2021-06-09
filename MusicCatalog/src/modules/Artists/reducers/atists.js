@@ -1,4 +1,4 @@
-import { SET_ARTISTS } from '../../../constants/types';
+import { SET_ARTISTS } from '../../../constants/actionsTypes';
 
 const INITIAL_STATE = {
   artists: [],

@@ -1,4 +1,4 @@
-import { SET_TRACKS } from '../../../constants/types';
+import { SET_TRACKS } from '../../../constants/actionsTypes';
 
 export const trackRender = tracks => {
   return {

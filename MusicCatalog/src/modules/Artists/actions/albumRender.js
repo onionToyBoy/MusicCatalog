@@ -1,4 +1,4 @@
-import { SET_ALBUMS } from '../../../constants/types';
+import { SET_ALBUMS } from '../../../constants/actionsTypes';
 
 export const albumRender = albums => {
   return {
