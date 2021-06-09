@@ -19,7 +19,7 @@ export const ArtistsAlbums = ({ componentId }) => {
     dispatch(getAlbums(componentId));
   }, [dispatch]);
 
-  const toTracks = (artistName, albumNane, id) => {
+  const onOpenTracks = (artistName, albumNane, id) => {
     Navigation.push(componentId, {
       component: {
         name: routes.AlbumTracks,
@@ -38,7 +38,7 @@ export const ArtistsAlbums = ({ componentId }) => {
   const renderAlbums = ({ item }) => (
     <Album
       id={item.collectionId}
-      openTracks={toTracks}
+      onOpenTracks={onOpenTracks}
       artistName={item.artistName}
       collectionName={item.collectionName}
       cover={item.artworkUrl60}

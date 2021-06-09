@@ -19,9 +19,9 @@ export const ArtistsScreen = ({ componentId }) => {
 
   useEffect(() => {
     dispatch(searchArtist(searchValue));
-  }, [searchValue,dispatch]);
+  }, [searchValue, dispatch]);
 
-  const toAlbums = ( name, id) => {
+  const onOpenAlbum = (name, id) => {
     Navigation.push(componentId, {
       component: {
         name: routes.ArtistsAlbums,
@@ -29,7 +29,7 @@ export const ArtistsScreen = ({ componentId }) => {
         options: {
           topBar: {
             title: {
-              text: name+' albums',
+              text: name + ' albums',
             },
           },
         },
@@ -37,23 +37,19 @@ export const ArtistsScreen = ({ componentId }) => {
     });
   };
 
-  const renderArtists = ( {item} ) => (
+  const renderArtists = ({ item }) => (
     <Artist
       name={item.artistName}
       genre={item.primaryGenreName}
-      openAlbums={toAlbums}
+      onOpenAlbum={onOpenAlbum}
       id={item.artistId}
     />
-  )
+  );
 
   return (
     <View style={styles.container}>
       <SearchBar onSearch={setSearchValue} />
-      <FlatList
-        data={artists}
-        keyExtractor={item => item.artistId}
-        renderItem={renderArtists}
-      />
+      <FlatList data={artists} keyExtractor={item => item.artistId} renderItem={renderArtists} />
     </View>
   );
 };

@@ -4,9 +4,11 @@ import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { colors } from '../../../constants/colors';
 import { symbols } from '../../../constants/symbols';
 
-export const Artist = ({ name, genre, openAlbums, id }) => {
+export const Artist = ({ name, genre, onOpenAlbum, id }) => {
+const onPressArtist =() => onOpenAlbum(name, id)
+
   return (
-    <TouchableOpacity style={styles.container} onPress={() => openAlbums(name, id)}>
+    <TouchableOpacity style={styles.container} onPress={onPressArtist}>
       <View style={styles.leftContainer}>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.gerne}>{genre}</Text>

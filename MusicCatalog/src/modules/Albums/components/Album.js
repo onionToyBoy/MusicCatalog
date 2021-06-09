@@ -4,11 +4,13 @@ import { View, StyleSheet, TouchableOpacity, Text, Image } from 'react-native';
 import { colors } from '../../../constants/colors';
 import { symbols } from '../../../constants/symbols';
 
-export const Album = ({ artistName, collectionName, cover, collectionPrice, openTracks, id }) => {
+export const Album = ({ artistName, collectionName, cover, collectionPrice, onOpenTracks, id }) => {
+  const onPressAlbum = () => onOpenTracks(artistName, collectionName, id)
+
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => openTracks(artistName, collectionName, id)}
+      onPress={onPressAlbum}
     >
       <View style={styles.leftContainer}>
         <Image style={styles.image} source={{ uri: cover }} />
