@@ -20,7 +20,7 @@ export function getAlbums(artistId) {
   return async dispatch => {
     try {
       const albums = await getSpecificAlbums(artistId);
-      dispatch(moveToAlbums(albums));
+      dispatch(moveToAlbums(albums.results.slice(1)));
     } catch {
       console.log('error');
     }
@@ -31,7 +31,7 @@ export function getTracks(albumId) {
   return async dispatch => {
     try {
       const albums = await getSpecificTracks(albumId);
-      dispatch(moveToTracks(albums));
+      dispatch(moveToTracks(albums.results.slice(1)));
     } catch {
       console.log('error');
     }

@@ -38,7 +38,7 @@ export const ArtistsAlbums = ({ componentId }) => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={albums ? albums.slice(1) : albums}
+        data={albums}
         keyExtractor={item => item.collectionId}
         renderItem={({ item }) => (
           <Album

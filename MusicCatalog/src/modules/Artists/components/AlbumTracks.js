@@ -19,7 +19,7 @@ export const AlbumTracks = ({ componentId }) => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={tracks ? tracks.slice(1) : tracks}
+        data={tracks}
         keyExtractor={item => item.trackId}
         renderItem={({ item }) => (
           <Track name={item.trackName} number={item.trackNumber} time={item.trackTimeMillis} />
