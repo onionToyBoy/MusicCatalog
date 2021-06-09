@@ -37,21 +37,22 @@ export const ArtistsScreen = ({ componentId }) => {
     });
   };
 
+  const renderArtists = ( {item} ) => (
+    <Artist
+      name={item.artistName}
+      genre={item.primaryGenreName}
+      openAlbums={toAlbums}
+      id={item.artistId}
+    />
+  )
+
   return (
     <View style={styles.container}>
       <SearchBar onSearch={setSearchValue} />
       <FlatList
         data={artists}
         keyExtractor={item => item.artistId}
-        renderItem={({ item }) => (
-          <Artist
-            name={item.artistName}
-            genre={item.primaryGenreName}
-            openAlbums={toAlbums}
-            id={item.artistId}
-            componentId={componentId}
-          />
-        )}
+        renderItem={renderArtists}
       />
     </View>
   );

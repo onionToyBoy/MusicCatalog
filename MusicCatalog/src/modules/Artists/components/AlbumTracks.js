@@ -16,14 +16,16 @@ export const AlbumTracks = ({ componentId }) => {
     dispatch(getTracks(componentId));
   }, [dispatch]);
 
+  const renderTracks = ({ item }) => (
+    <Track name={item.trackName} number={item.trackNumber} time={item.trackTimeMillis} />
+  )
+
   return (
     <View style={styles.container}>
       <FlatList
         data={tracks}
         keyExtractor={item => item.trackId}
-        renderItem={({ item }) => (
-          <Track name={item.trackName} number={item.trackNumber} time={item.trackTimeMillis} />
-        )}
+        renderItem={renderTracks}
       />
     </View>
   );

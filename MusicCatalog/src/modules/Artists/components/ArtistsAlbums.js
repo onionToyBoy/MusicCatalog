@@ -35,21 +35,23 @@ export const ArtistsAlbums = ({ componentId }) => {
     });
   };
 
+  const renderAlbums = ({ item }) => (
+    <Album
+      id={item.collectionId}
+      openTracks={toTracks}
+      artistName={item.artistName}
+      collectionName={item.collectionName}
+      cover={item.artworkUrl60}
+      collectionPrice={checkPrice(item.collectionPrice)}
+    />
+  )
+
   return (
     <View style={styles.container}>
       <FlatList
         data={albums}
         keyExtractor={item => item.collectionId}
-        renderItem={({ item }) => (
-          <Album
-            id={item.collectionId}
-            openTracks={toTracks}
-            artistName={item.artistName}
-            collectionName={item.collectionName}
-            cover={item.artworkUrl60}
-            collectionPrice={checkPrice(item.collectionPrice)}
-          />
-        )}
+        renderItem={renderAlbums}
       />
     </View>
   );
