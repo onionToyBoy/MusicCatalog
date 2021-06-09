@@ -1,15 +1,15 @@
 import { searchArtists } from '../../../requests/searchArtists';
-import { searchChanged } from '../actions/searchChanged';
-import { moveToAlbums } from '../actions/moveToAlbums';
+import {artistRender } from '../actions/artistRender';
+import { albumRender } from '../actions/albumRender';
 import { getSpecificTracks } from '../../../requests/getSpecificTracks';
 import { getSpecificAlbums } from '../../../requests/getSpecificAlbums';
-import { moveToTracks } from '../actions/moveToTracks';
+import { trackRender } from '../actions/trackRender';
 
 export function searchArtist(searchValue = 'artist') {
   return async dispatch => {
     try {
       const artists = await searchArtists(searchValue);
-      dispatch(searchChanged(artists.results));
+      dispatch(artistRender(artists.results));
     } catch {
       console.log('error');
     }
@@ -20,7 +20,7 @@ export function getAlbums(artistId) {
   return async dispatch => {
     try {
       const albums = await getSpecificAlbums(artistId);
-      dispatch(moveToAlbums(albums.results.slice(1)));
+      dispatch(albumRender(albums.results.slice(1)));
     } catch {
       console.log('error');
     }
@@ -31,7 +31,7 @@ export function getTracks(albumId) {
   return async dispatch => {
     try {
       const albums = await getSpecificTracks(albumId);
-      dispatch(moveToTracks(albums.results.slice(1)));
+      dispatch(trackRender(albums.results.slice(1)));
     } catch {
       console.log('error');
     }
