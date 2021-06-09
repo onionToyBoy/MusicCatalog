@@ -9,7 +9,7 @@ export function searchArtist(searchValue = 'artist') {
   return async dispatch => {
     try {
       const artists = await searchArtists(searchValue);
-      dispatch(searchChanged(artists));
+      dispatch(searchChanged(artists.results));
     } catch {
       console.log('error');
     }

@@ -1,4 +1,4 @@
-export const selectArtists = state => state.search.artists.results;
+export const selectArtists = state => state.search.artists;
 
 export const selectAlbums = state => state.goToAlbums.albums.results;
 

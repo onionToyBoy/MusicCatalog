@@ -7,8 +7,9 @@ import { RootNavigation } from './src/navigation/RootNavigation';
 import { ArtistsAlbums } from './src/modules/Artists/components/ArtistsAlbums';
 import { AlbumTracks } from './src/modules/Artists/components/AlbumTracks';
 import { routes } from './src/constants/routes';
+
 if (__DEV__) {
-  import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
+import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
 }
 
 Navigation.registerComponent(routes.Artists, () => ReduxProvider(ArtistsScreen));

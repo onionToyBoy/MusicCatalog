@@ -1,5 +1,5 @@
-export const SEARCH_ARTISTS = 'SEARCH_ARTISTS';
+export const SET_ARTISTS = 'SET_ARTISTS';
 
-export const SEARCH_ALBUMS = 'SEARCH_ALBUMS';
+export const SET_ALBUMS = 'SET_ALBUMS';
 
-export const SEARCH_TRACKS = 'SEARCH_TRACKS';
+export const SET_TRACKS = 'SET_TRACKS';

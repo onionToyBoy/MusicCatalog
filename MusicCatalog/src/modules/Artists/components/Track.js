@@ -5,7 +5,6 @@ import { colors } from '../../../constants/colors';
 import { timeConventer } from '../../../utils/timeConventer';
 
 export const Track = ({ name, number, time }) => {
-
   return (
     <TouchableOpacity style={styles.container}>
       <View style={styles.leftSide}>

@@ -17,7 +17,7 @@ export const ArtistsAlbums = ({ componentId }) => {
 
   useEffect(() => {
     dispatch(getAlbums(componentId));
-  }, []);
+  }, [dispatch]);
 
   return (
     <View style={styles.container}>
@@ -42,7 +42,8 @@ export const ArtistsAlbums = ({ componentId }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.DARK_GRAY,
     flex: 1,
+    backgroundColor: colors.DARK_GRAY,
+   
   },
 });

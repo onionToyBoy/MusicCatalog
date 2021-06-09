@@ -1,8 +1,8 @@
-import { SEARCH_ALBUMS } from '../../../constants/types';
+import { SET_ALBUMS } from '../../../constants/types';
 
 export const moveToAlbums = albums => {
   return {
-    type: SEARCH_ALBUMS,
+    type: SET_ALBUMS,
     payload: albums,
   };
 };

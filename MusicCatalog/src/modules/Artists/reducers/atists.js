@@ -1,4 +1,4 @@
-import { SEARCH_ARTISTS } from '../../../constants/types';
+import { SET_ARTISTS } from '../../../constants/types';
 
 const INITIAL_STATE = {
   artists: [],
@@ -6,7 +6,7 @@ const INITIAL_STATE = {
 
 export const artists = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case SEARCH_ARTISTS:
+    case SET_ARTISTS:
       return {
         ...state,
         artists: action.payload,

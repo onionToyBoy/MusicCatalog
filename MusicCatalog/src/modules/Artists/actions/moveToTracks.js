@@ -1,8 +1,8 @@
-import { SEARCH_TRACKS } from '../../../constants/types';
+import { SET_TRACKS } from '../../../constants/types';
 
 export const moveToTracks = tracks => {
   return {
-    type: SEARCH_TRACKS,
+    type: SET_TRACKS,
     payload: tracks,
   };
 };

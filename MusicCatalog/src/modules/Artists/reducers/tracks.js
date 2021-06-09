@@ -1,12 +1,13 @@
-import { SEARCH_TRACKS } from '../../../constants/types';
+import { SET_TRACKS } from '../../../constants/types';
 
 const INITIAL_STATE = {
-  tracks: [],
+  tracks: {}, 
+  artistId:'',
 };
 
 export const tracks = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case SEARCH_TRACKS:
+    case SET_TRACKS:
       return {
         ...state,
         tracks: action.payload,

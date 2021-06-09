@@ -1,8 +1,8 @@
-import { SEARCH_ARTISTS } from '../../../constants/types';
+import { SET_ARTISTS } from '../../../constants/types';
 
 export const searchChanged = artists => {
   return {
-    type: SEARCH_ARTISTS,
+    type: SET_ARTISTS,
     payload: artists,
   };
 };

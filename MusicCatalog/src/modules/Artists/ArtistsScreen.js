@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, View, StyleSheet } from 'react-native';
-import { SearchBar } from '../../components/SearchBar';
 import { useDispatch, useSelector } from 'react-redux';
+import { Navigation } from 'react-native-navigation';
 
 import { colors } from '../../constants/colors';
 import { Artist } from './components/Artist';
 import { selectArtists } from './selectors';
 import { searchArtist } from './thunks';
 import { toAlbums } from '../../navigation/toAlbums';
+import { routes } from '../../constants/routes';
+import { SearchBar } from '../../components/SearchBar';
 
 export const ArtistsScreen = ({ componentId }) => {
   const [searchValue, setSearchValue] = useState('artists');
@@ -20,16 +22,25 @@ export const ArtistsScreen = ({ componentId }) => {
     dispatch(searchArtist(searchValue));
   }, [searchValue]);
 
- 
-
-  const searching = text => {
-    setSearchValue(text);
+  const toAlbums = ( name, id) => {
+    Navigation.push(componentId, {
+      component: {
+        name: routes.ArtistsAlbums,
+        id: id,
+        options: {
+          topBar: {
+            title: {
+              text: name+' albums',
+            },
+          },
+        },
+      },
+    });
   };
 
   return (
     <View style={styles.container}>
-      <SearchBar onSearch={searching} />
-
+      <SearchBar onSearch={setSearchValue} />
       <FlatList
         data={artists}
         keyExtractor={item => item.artistId}
