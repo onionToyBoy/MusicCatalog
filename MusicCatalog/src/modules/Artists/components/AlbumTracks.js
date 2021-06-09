@@ -14,7 +14,7 @@ export const AlbumTracks = ({ componentId }) => {
 
   useEffect(() => {
     dispatch(getTracks(componentId));
-  }, []);
+  }, [dispatch]);
 
   return (
     <View style={styles.container}>

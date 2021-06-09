@@ -7,7 +7,6 @@ import { colors } from '../../constants/colors';
 import { Artist } from './components/Artist';
 import { selectArtists } from './selectors';
 import { searchArtist } from './thunks';
-import { toAlbums } from '../../navigation/toAlbums';
 import { routes } from '../../constants/routes';
 import { SearchBar } from '../../components/SearchBar';
 
@@ -20,7 +19,7 @@ export const ArtistsScreen = ({ componentId }) => {
 
   useEffect(() => {
     dispatch(searchArtist(searchValue));
-  }, [searchValue]);
+  }, [searchValue,dispatch]);
 
   const toAlbums = ( name, id) => {
     Navigation.push(componentId, {

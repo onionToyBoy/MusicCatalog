@@ -7,11 +7,11 @@ import { timeConventer } from '../../../utils/timeConventer';
 export const Track = ({ name, number, time }) => {
   return (
     <TouchableOpacity style={styles.container}>
-      <View style={styles.leftSide}>
+      <View style={styles.leftContainer}>
         <Text style={styles.numbers}>{number}</Text>
         <Text style={styles.name}>{name}</Text>
       </View>
-      <View style={styles.rightSIde}>
+      <View style={styles.rightContainer}>
         <Text style={styles.numbers}>{timeConventer(time)}</Text>
       </View>
     </TouchableOpacity>
@@ -37,12 +37,12 @@ const styles = StyleSheet.create({
     color: colors.GOLD,
     fontSize: 20,
   },
-  rightSIde: {
+  rightContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'flex-end',
   },
-  leftSide: {
+  leftContainer: {
     flexDirection: 'row',
     flex: 3,
     alignItems: 'center',

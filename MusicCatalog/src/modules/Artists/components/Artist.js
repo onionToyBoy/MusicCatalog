@@ -7,11 +7,11 @@ import { symbols } from '../../../constants/symbols';
 export const Artist = ({ name, genre, openAlbums, id }) => {
   return (
     <TouchableOpacity style={styles.container} onPress={() => openAlbums(name, id)}>
-      <View style={styles.leftSide}>
+      <View style={styles.leftContainer}>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.gerne}>{genre}</Text>
       </View>
-      <View style={styles.rightSIde}>
+      <View style={styles.rightContainer}>
         <Text style={styles.bracket}>{symbols.RIGHT_ANGULAR_BRACKET}</Text>
       </View>
     </TouchableOpacity>
@@ -40,12 +40,12 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginRight: 3,
   },
-  rightSIde: {
+  rightContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'flex-end',
   },
-  leftSide: {
+  leftContainer: {
     flex: 1,
   },
 });

@@ -1,31 +1,23 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, Dimensions, Image } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text, Image } from 'react-native';
 
 import { colors } from '../../../constants/colors';
 import { symbols } from '../../../constants/symbols';
 
-export const Album = ({
-  artistName,
-  collectionName,
-  cover,
-  collectionPrice,
-  openTracks,
-  id,
-  componentId,
-}) => {
+export const Album = ({ artistName, collectionName, cover, collectionPrice, openTracks, id }) => {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => openTracks(artistName, collectionName, id, componentId)}
+      onPress={() => openTracks(artistName, collectionName, id)}
     >
-      <View style={styles.leftSide}>
+      <View style={styles.leftContainer}>
         <Image style={styles.image} source={{ uri: cover }} />
         <View>
           <Text style={styles.title}>{collectionName}</Text>
           <Text style={styles.subtitle}>{artistName}</Text>
         </View>
       </View>
-      <View style={styles.rightSIde}>
+      <View style={styles.rightContainer}>
         <Text style={styles.price}>{collectionPrice}</Text>
         <Text style={styles.bracket}>{symbols.RIGHT_ANGULAR_BRACKET}</Text>
       </View>
@@ -33,25 +25,23 @@ export const Album = ({
   );
 };
 
-const windowWidth = Dimensions.get('window').width;
-
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 15,
     backgroundColor: colors.MIDDLE_GRAY,
-    width: windowWidth,
+    width: '100%',
     borderBottomColor: colors.BRIGHT_GRAY,
     borderBottomWidth: 2,
   },
-  rightSIde: {
+  rightContainer: {
     flexDirection: 'row',
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
-  leftSide: {
+  leftContainer: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
@@ -77,7 +67,9 @@ const styles = StyleSheet.create({
   image: {
     justifyContent: 'center',
     minWidth: 60,
-    minHeight: 60,
+    height: 'auto',
+    resizeMode: 'contain',
+    aspectRatio: 1,
     marginRight: 10,
   },
 });

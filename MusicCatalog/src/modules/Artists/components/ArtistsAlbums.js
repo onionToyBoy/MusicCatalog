@@ -8,7 +8,7 @@ import { selectAlbums } from '../selectors';
 import { getAlbums } from '../thunks';
 import { Album } from '../../Albums/components/Album';
 import { checkPrice } from '../../../utils/checkPrice';
-import { toTracks } from '../../../navigation/toTracks';
+import { routes } from '../../../constants/routes';
 
 export const ArtistsAlbums = ({ componentId }) => {
   const dispatch = useDispatch();
@@ -18,6 +18,22 @@ export const ArtistsAlbums = ({ componentId }) => {
   useEffect(() => {
     dispatch(getAlbums(componentId));
   }, [dispatch]);
+
+  const toTracks = (artistName, albumNane, id) => {
+    Navigation.push(componentId, {
+      component: {
+        name: routes.AlbumTracks,
+        id: id,
+        options: {
+          topBar: {
+            title: {
+              text: albumNane,
+            },
+          },
+        },
+      },
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -32,7 +48,6 @@ export const ArtistsAlbums = ({ componentId }) => {
             collectionName={item.collectionName}
             cover={item.artworkUrl60}
             collectionPrice={checkPrice(item.collectionPrice)}
-            componentId={componentId}
           />
         )}
       />
