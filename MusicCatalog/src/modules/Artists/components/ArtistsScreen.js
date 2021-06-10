@@ -37,14 +37,7 @@ export const ArtistsScreen = ({ componentId }) => {
     });
   };
 
-  const renderArtists = ({ item }) => (
-    <Artist
-      name={item.artistName}
-      genre={item.primaryGenreName}
-      onOpenAlbum={onOpenAlbum}
-      id={item.artistId}
-    />
-  );
+  const renderArtists = ({ item }) => <Artist {...item} onOpenAlbum={onOpenAlbum} />;
 
   return (
     <View style={styles.container}>

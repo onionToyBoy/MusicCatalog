@@ -4,14 +4,14 @@ import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { colors } from '../../../constants/colors';
 import { symbols } from '../../../constants/symbols';
 
-export const Artist = ({ name, genre, onOpenAlbum, id }) => {
-const onPressArtist =() => onOpenAlbum(name, id)
+export const Artist = ({ artistName, primaryGenreName, onOpenAlbum, artistId }) => {
+const onPressArtist =() => onOpenAlbum(artistName, artistId)
 
   return (
     <TouchableOpacity style={styles.container} onPress={onPressArtist}>
       <View style={styles.leftContainer}>
-        <Text style={styles.name}>{name}</Text>
-        <Text style={styles.gerne}>{genre}</Text>
+        <Text style={styles.name}>{artistName}</Text>
+        <Text style={styles.gerne}>{primaryGenreName}</Text>
       </View>
       <View style={styles.rightContainer}>
         <Text style={styles.bracket}>{symbols.RIGHT_ANGULAR_BRACKET}</Text>

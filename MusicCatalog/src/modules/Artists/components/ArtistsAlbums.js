@@ -37,12 +37,13 @@ export const ArtistsAlbums = ({ componentId }) => {
 
   const renderAlbums = ({ item }) => (
     <Album
-      id={item.collectionId}
       onOpenTracks={onOpenTracks}
-      artistName={item.artistName}
-      collectionName={item.collectionName}
-      cover={item.artworkUrl60}
-      collectionPrice={checkPrice(item.collectionPrice)}
+      // artistName={item.artistName}
+      // collectionName={item.collectionName}
+      // cover={item.artworkUrl60}
+      // collectionPrice={item.collectionPrice}
+      // id={item.collectionId}
+      {...item}
     />
   )
 

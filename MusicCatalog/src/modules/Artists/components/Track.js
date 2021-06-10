@@ -4,18 +4,20 @@ import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { colors } from '../../../constants/colors';
 import { timeConventer } from '../../../utils/timeConventer';
 
-export const Track = ({ name, number, time }) => {
+export const Track = ({ trackName, trackNumber, trackTimeMillis }) => {
+  const convertedTime = timeConventer(trackTimeMillis);
+
   return (
     <TouchableOpacity style={styles.container}>
       <View style={styles.leftContainer}>
-        <Text style={styles.numbers}>{number}</Text>
-        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.numbers}>{trackNumber}</Text>
+        <Text style={styles.name}>{trackName}</Text>
       </View>
       <View style={styles.rightContainer}>
-        <Text style={styles.numbers}>{timeConventer(time)}</Text>
+        <Text style={styles.numbers}>{convertedTime}</Text>
       </View>
     </TouchableOpacity>
-  ); 
+  );
 };
 
 const styles = StyleSheet.create({

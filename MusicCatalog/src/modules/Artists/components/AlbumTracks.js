@@ -17,7 +17,7 @@ export const AlbumTracks = ({ componentId }) => {
   }, [dispatch]);
 
   const renderTracks = ({ item }) => (
-    <Track name={item.trackName} number={item.trackNumber} time={item.trackTimeMillis} />
+    <Track {...item}/>
   )
 
   return (
@@ -33,7 +33,8 @@ export const AlbumTracks = ({ componentId }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.DARK_GRAY,
     flex: 1,
+    backgroundColor: colors.DARK_GRAY,
+   
   },
 });

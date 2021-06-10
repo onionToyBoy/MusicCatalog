@@ -3,24 +3,31 @@ import { View, StyleSheet, TouchableOpacity, Text, Image } from 'react-native';
 
 import { colors } from '../../../constants/colors';
 import { symbols } from '../../../constants/symbols';
+import { checkPrice } from '../../../utils/checkPrice';
 
-export const Album = ({ artistName, collectionName, cover, collectionPrice, onOpenTracks, id }) => {
-  const onPressAlbum = () => onOpenTracks(artistName, collectionName, id)
+export const Album = ({
+  artistName,
+  collectionName,
+  artworkUrl60,
+  collectionPrice,
+  onOpenTracks,
+  collectionId,
+}) => {
+  const onPressAlbum = () => onOpenTracks(artistName, collectionName, collectionId);
+
+  const checkedPrice = checkPrice(collectionPrice);
 
   return (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={onPressAlbum}
-    >
+    <TouchableOpacity style={styles.container} onPress={onPressAlbum}>
       <View style={styles.leftContainer}>
-        <Image style={styles.image} source={{ uri: cover }} />
+        <Image style={styles.image} source={{ uri: artworkUrl60 }} />
         <View>
           <Text style={styles.title}>{collectionName}</Text>
           <Text style={styles.subtitle}>{artistName}</Text>
         </View>
       </View>
       <View style={styles.rightContainer}>
-        <Text style={styles.price}>{collectionPrice}</Text>
+        <Text style={styles.price}>{checkedPrice}</Text>
         <Text style={styles.bracket}>{symbols.RIGHT_ANGULAR_BRACKET}</Text>
       </View>
     </TouchableOpacity>
