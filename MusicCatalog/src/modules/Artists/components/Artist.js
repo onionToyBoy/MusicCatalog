@@ -5,7 +5,7 @@ import { colors } from '../../../constants/colors';
 import { symbols } from '../../../constants/symbols';
 
 export const Artist = ({ artistName, primaryGenreName, onOpenAlbum, artistId }) => {
-const onPressArtist =() => onOpenAlbum(artistName, artistId)
+  const onPressArtist = () => onOpenAlbum(artistName, artistId);
 
   return (
     <TouchableOpacity style={styles.container} onPress={onPressArtist}>

@@ -4,7 +4,7 @@ import { RootNavigation } from './src/navigation/RootNavigation';
 
 if (__DEV__) {
     
-import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
+  import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
 }
 
 Navigation.events().registerAppLaunchedListener(RootNavigation());

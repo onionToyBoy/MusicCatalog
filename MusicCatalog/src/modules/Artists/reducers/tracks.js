@@ -1,8 +1,8 @@
 import { SET_TRACKS } from '../../../constants/actionsTypes';
 
 const INITIAL_STATE = {
-  tracks: {}, 
-  artistId:'',
+  tracks: {},
+  artistId: '',
 };
 
 export const tracks = (state = INITIAL_STATE, action) => {

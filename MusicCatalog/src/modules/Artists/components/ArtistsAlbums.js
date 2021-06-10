@@ -24,8 +24,8 @@ export const ArtistsAlbums = ({ componentId, artistId }) => {
       component: {
         name: routes.AlbumTracks,
         id: id,
-        passProps : { 
-          albumId : id, 
+        passProps: {
+          albumId: id,
         },
         options: {
           topBar: {
@@ -38,20 +38,11 @@ export const ArtistsAlbums = ({ componentId, artistId }) => {
     });
   };
 
-  const renderAlbums = ({ item }) => (
-    <Album
-      onOpenTracks={onOpenTracks}
-      {...item}
-    />
-  )
+  const renderAlbums = ({ item }) => <Album onOpenTracks={onOpenTracks} {...item} />;
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={albums}
-        keyExtractor={item => item.collectionId}
-        renderItem={renderAlbums}
-      />
+      <FlatList data={albums} keyExtractor={item => item.collectionId} renderItem={renderAlbums} />
     </View>
   );
 };
@@ -60,6 +51,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.DARK_GRAY,
-   
   },
 });

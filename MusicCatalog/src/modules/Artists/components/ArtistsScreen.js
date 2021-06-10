@@ -26,8 +26,8 @@ export const ArtistsScreen = ({ componentId }) => {
       component: {
         name: routes.ArtistsAlbums,
         id: id,
-        passProps : { 
-         artistId: id, 
+        passProps: {
+          artistId: id,
         },
         options: {
           topBar: {

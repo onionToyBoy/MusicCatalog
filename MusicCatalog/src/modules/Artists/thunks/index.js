@@ -1,8 +1,7 @@
 import { searchArtists } from '../../../requests/searchArtists';
-import {setAlbums, setArtists, setTracks } from '../actions';
+import { setAlbums, setArtists, setTracks } from '../actions';
 import { getSpecificTracks } from '../../../requests/getSpecificTracks';
 import { getSpecificAlbums } from '../../../requests/getSpecificAlbums';
-
 
 export function searchArtist(searchValue = 'artist') {
   return async dispatch => {
