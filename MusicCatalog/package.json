@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.15.5",
@@ -25,7 +26,9 @@
     "@reduxjs/toolkit": "^1.5.1",
     "babel-jest": "^26.6.3",
     "eslint": "7.14.0",
+    "husky": "^6.0.0",
     "jest": "^26.6.3",
+    "lint-staged": "^11.0.0",
     "metro-react-native-babel-preset": "^0.64.0",
     "react-test-renderer": "17.0.1",
     "reactotron-react-native": "^5.0.0",
@@ -34,5 +37,16 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "husky":{
+    "hooks":{
+      "pre-commit":"lint-staged"
+    }
+  },
+  "lint-staged":{
+    "*.js": [
+      "npm run lint:fix",
+      "git add"
+    ]
   }
 }
