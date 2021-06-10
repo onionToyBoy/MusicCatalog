@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, View, StyleSheet } from 'react-native';
+import { FlatList, View, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 
@@ -28,6 +28,7 @@ export const ArtistsScreen = ({ componentId }) => {
         id: id,
         passProps: {
           artistId: id,
+          artistName: name,
         },
         options: {
           topBar: {

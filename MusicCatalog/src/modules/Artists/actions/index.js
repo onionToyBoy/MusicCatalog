@@ -1,9 +1,10 @@
 import { SET_ALBUMS, SET_ARTISTS, SET_TRACKS } from '../../../constants/actionsTypes';
 
-export const setAlbums = albums => {
+export const setAlbums = (albums, artistName )=> {
   return {
     type: SET_ALBUMS,
-    payload: albums,
+    payload: albums ,
+    artistName: artistName,
   };
 };
 

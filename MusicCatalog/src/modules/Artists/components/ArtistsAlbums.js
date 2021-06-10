@@ -7,16 +7,15 @@ import { colors } from '../../../constants/colors';
 import { selectAlbums } from '../selectors';
 import { getAlbums } from '../thunks';
 import { Album } from '../../Albums/components/Album';
-import { checkPrice } from '../../../utils';
 import { routes } from '../../../constants/routes';
 
-export const ArtistsAlbums = ({ componentId, artistId }) => {
+export const ArtistsAlbums = ({ componentId, artistId, artistName }) => {
   const dispatch = useDispatch();
 
-  const albums = useSelector(selectAlbums);
+  const albums = useSelector(selectAlbums(artistName));
 
   useEffect(() => {
-    dispatch(getAlbums(artistId));
+    dispatch(getAlbums(artistId,artistName));
   }, [dispatch]);
 
   const onOpenTracks = (artistName, albumNane, id) => {

@@ -15,7 +15,7 @@ Navigation.registerComponent(routes.AlbumTracks, () => ReduxProvider(AlbumTracks
 
 Navigation.setDefaultOptions({
   statusBar: {
-    backgroundColor: colors.BRIGHT_GRAY,
+    backgroundColor: colors.PURPLE,
   },
   topBar: {
     title: {

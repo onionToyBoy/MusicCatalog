@@ -14,11 +14,11 @@ export function searchArtist(searchValue = 'artist') {
   };
 }
 
-export function getAlbums(artistId) {
+export function getAlbums(artistId, artistName) {
   return async dispatch => {
     try {
-      const albums = await getSpecificAlbums(artistId);
-      dispatch(setAlbums(albums.results.slice(1)));
+      const albums = await getSpecificAlbums(artistId, artistName);
+      dispatch(setAlbums(albums.results.slice(1), artistName));
     } catch {
       console.log('error');
     }
