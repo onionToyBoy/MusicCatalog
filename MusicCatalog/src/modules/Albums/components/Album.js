@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Text, Image } from 'react-native';
 
 import { colors } from '../../../constants/colors';
 import { symbols } from '../../../constants/symbols';
-import { checkPrice } from '../../../utils/checkPrice';
+import { checkPrice } from '../../../utils';
 
 export const Album = ({
   artistName,

@@ -29,7 +29,7 @@ export const ArtistsScreen = ({ componentId }) => {
         options: {
           topBar: {
             title: {
-              text: name + ' albums',
+              text: `${name} albums`,
             },
           },
         },

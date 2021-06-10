@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
 import { colors } from '../../../constants/colors';
-import { timeConventer } from '../../../utils/timeConventer';
+import { timeConventer } from '../../../utils';
 
 export const Track = ({ trackName, trackNumber, trackTimeMillis }) => {
   const convertedTime = timeConventer(trackTimeMillis);
