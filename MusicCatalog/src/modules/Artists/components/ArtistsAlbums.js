@@ -7,16 +7,16 @@ import { colors } from '../../../constants/colors';
 import { selectAlbums } from '../selectors';
 import { getAlbums } from '../thunks';
 import { Album } from '../../Albums/components/Album';
-import { checkPrice } from '../../../utils/checkPrice';
+import { checkPrice } from '../../../utils';
 import { routes } from '../../../constants/routes';
 
-export const ArtistsAlbums = ({ componentId }) => {
+export const ArtistsAlbums = ({ componentId, artistId }) => {
   const dispatch = useDispatch();
 
   const albums = useSelector(selectAlbums);
 
   useEffect(() => {
-    dispatch(getAlbums(componentId));
+    dispatch(getAlbums(artistId));
   }, [dispatch]);
 
   const onOpenTracks = (artistName, albumNane, id) => {
@@ -24,6 +24,9 @@ export const ArtistsAlbums = ({ componentId }) => {
       component: {
         name: routes.AlbumTracks,
         id: id,
+        passProps : { 
+          albumId : id, 
+        },
         options: {
           topBar: {
             title: {
@@ -38,11 +41,6 @@ export const ArtistsAlbums = ({ componentId }) => {
   const renderAlbums = ({ item }) => (
     <Album
       onOpenTracks={onOpenTracks}
-      // artistName={item.artistName}
-      // collectionName={item.collectionName}
-      // cover={item.artworkUrl60}
-      // collectionPrice={item.collectionPrice}
-      // id={item.collectionId}
       {...item}
     />
   )

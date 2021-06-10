@@ -7,26 +7,20 @@ import { selectTracks } from '../selectors';
 import { getTracks } from '../thunks';
 import { Track } from './Track';
 
-export const AlbumTracks = ({ componentId }) => {
+export const AlbumTracks = ({ albumId }) => {
   const dispatch = useDispatch();
 
   const tracks = useSelector(selectTracks);
 
   useEffect(() => {
-    dispatch(getTracks(componentId));
+    dispatch(getTracks(albumId));
   }, [dispatch]);
 
-  const renderTracks = ({ item }) => (
-    <Track {...item}/>
-  )
+  const renderTracks = ({ item }) => <Track {...item} />;
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={tracks}
-        keyExtractor={item => item.trackId}
-        renderItem={renderTracks}
-      />
+      <FlatList data={tracks} keyExtractor={item => item.trackId} renderItem={renderTracks} />
     </View>
   );
 };
@@ -35,6 +29,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.DARK_GRAY,
-   
   },
 });
