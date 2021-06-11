@@ -13,7 +13,7 @@ export const Album = ({
   onOpenTracks,
   collectionId,
 }) => {
-  const onPressAlbum = () => onOpenTracks(artistName, collectionName, collectionId);
+  const onPressAlbum = () => onOpenTracks(collectionName, collectionId);
 
   const checkedPrice = checkPrice(collectionPrice);
 

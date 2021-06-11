@@ -9,7 +9,7 @@ export const SearchBar = ({ onSearch }) => {
       <TextInput
         onChangeText={onSearch}
         style={styles.input}
-        placeholder='Введите текст...'
+        placeholder='Enter text...'
         placeholderTextColor={colors.BRIGHT_GRAY}
       />
     </View>

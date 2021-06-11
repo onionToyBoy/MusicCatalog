@@ -14,7 +14,7 @@ export const AlbumTracks = ({ albumId }) => {
 
   useEffect(() => {
     dispatch(getTracks(albumId));
-  }, [dispatch]);
+  }, [dispatch, albumId]);
 
   const renderTracks = ({ item }) => <Track {...item} />;
 

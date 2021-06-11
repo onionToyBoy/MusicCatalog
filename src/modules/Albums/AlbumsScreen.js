@@ -10,12 +10,12 @@ export const AlbumsScreen = () => {
   const [data, setData] = useState([]);
   const [searchValue, setSearchValue] = useState('radiohead');
 
-  const itemCheck = item => {
-    if (item.artistName === 'Various Artists') {
-      return false;
-    }
-    return true;
-  };
+  // const itemCheck = item => {
+  //   if (item.artistName === 'Various Artists') {
+  //     return false;
+  //   }
+  //   return true;
+  // };
 
   useEffect(() => {
     if (searchValue.trim() === '') {

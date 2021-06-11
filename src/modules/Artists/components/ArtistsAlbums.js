@@ -15,21 +15,20 @@ export const ArtistsAlbums = ({ componentId, artistId, artistName }) => {
   const albums = useSelector(selectAlbums(artistName));
 
   useEffect(() => {
-    dispatch(getAlbums(artistId,artistName));
-  }, [dispatch]);
+    dispatch(getAlbums(artistId, artistName));
+  }, [dispatch, artistId, artistName]);
 
-  const onOpenTracks = (artistName, albumNane, id) => {
+  const onOpenTracks = (albumName, id) => {
     Navigation.push(componentId, {
       component: {
         name: routes.AlbumTracks,
-        id: id,
         passProps: {
           albumId: id,
         },
         options: {
           topBar: {
             title: {
-              text: albumNane,
+              text: albumName,
             },
           },
         },
