@@ -29,7 +29,7 @@ export function getTracks(albumId) {
   return async dispatch => {
     try {
       const albums = await getSpecificTracks(albumId);
-      dispatch(setTracks(albums.results.slice(1)));
+      dispatch(setTracks(albums.results.slice(1), albumId));
     } catch {
       console.log('error');
     }

@@ -17,9 +17,12 @@ export const setArtists = artists => {
   };
 };
 
-export const setTracks = tracks => {
+export const setTracks = (tracks, albumId) => {
   return {
     type: SET_TRACKS,
-    payload: tracks,
+    payload: {
+      tracks: tracks,
+      albumId: albumId,
+    },
   };
 };
