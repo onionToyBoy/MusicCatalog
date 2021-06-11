@@ -2,16 +2,18 @@ import { SET_TRACKS } from '../../../constants/actionsTypes';
 
 const INITIAL_STATE = {
   tracks: {},
-  artistId: '',
 };
 
 export const tracks = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case SET_TRACKS:
+    case SET_TRACKS: {
+      const updatedTracks = { ...state.tracks, [action.payload.albumId]: action.payload.tracks };
+
       return {
         ...state,
-        tracks: action.payload,
+        tracks: updatedTracks,
       };
+    }
     default:
       return state;
   }

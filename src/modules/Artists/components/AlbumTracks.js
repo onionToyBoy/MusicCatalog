@@ -10,7 +10,7 @@ import { Track } from './Track';
 export const AlbumTracks = ({ albumId }) => {
   const dispatch = useDispatch();
 
-  const tracks = useSelector(selectTracks);
+  const tracks = useSelector(selectTracks(albumId));
 
   useEffect(() => {
     dispatch(getTracks(albumId));

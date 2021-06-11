@@ -7,7 +7,7 @@ const INITIAL_STATE = {
 export const albums = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_ALBUMS: {
-      const updatedAlbums = { ...state.albums, [action.artistName]: action.payload };
+      const updatedAlbums = { ...state.albums, [action.payload.artistId]: action.payload.albums };
 
       return {
         ...state,

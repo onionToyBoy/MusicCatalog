@@ -14,11 +14,11 @@ export function searchArtist(searchValue = 'artist') {
   };
 }
 
-export function getAlbums(artistId, artistName) {
+export function getAlbums(artistId) {
   return async dispatch => {
     try {
-      const albums = await getSpecificAlbums(artistId, artistName);
-      dispatch(setAlbums(albums.results.slice(1), artistName));
+      const albums = await getSpecificAlbums(artistId);
+      dispatch(setAlbums(albums.results.slice(1), artistId));
     } catch {
       console.log('error');
     }
@@ -29,7 +29,7 @@ export function getTracks(albumId) {
   return async dispatch => {
     try {
       const albums = await getSpecificTracks(albumId);
-      dispatch(setTracks(albums.results.slice(1)));
+      dispatch(setTracks(albums.results.slice(1), albumId));
     } catch {
       console.log('error');
     }

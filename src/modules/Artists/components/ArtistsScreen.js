@@ -11,7 +11,7 @@ import { routes } from '../../../constants/routes';
 import { SearchBar } from '../../../components/SearchBar';
 
 export const ArtistsScreen = ({ componentId }) => {
-  const [searchValue, setSearchValue] = useState('artists');
+  const [searchValue, setSearchValue] = useState('');
 
   const dispatch = useDispatch();
 
@@ -28,7 +28,6 @@ export const ArtistsScreen = ({ componentId }) => {
         id: id,
         passProps: {
           artistId: id,
-          artistName: name,
         },
         options: {
           topBar: {
