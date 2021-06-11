@@ -15,6 +15,7 @@ export const SearchBar = ({ onSearch }) => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     minHeight: 40,
