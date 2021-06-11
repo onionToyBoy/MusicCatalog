@@ -9,14 +9,14 @@ import { getAlbums } from '../thunks';
 import { Album } from '../../Albums/components/Album';
 import { routes } from '../../../constants/routes';
 
-export const ArtistsAlbums = ({ componentId, artistId, artistName }) => {
+export const ArtistsAlbums = ({ componentId, artistId }) => {
   const dispatch = useDispatch();
 
-  const albums = useSelector(selectAlbums(artistName));
+  const albums = useSelector(selectAlbums(artistId));
 
   useEffect(() => {
-    dispatch(getAlbums(artistId, artistName));
-  }, [dispatch, artistId, artistName]);
+    dispatch(getAlbums(artistId));
+  }, [dispatch, artistId]);
 
   const onOpenTracks = (albumName, id) => {
     Navigation.push(componentId, {

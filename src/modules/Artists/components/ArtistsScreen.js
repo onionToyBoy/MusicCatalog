@@ -28,7 +28,6 @@ export const ArtistsScreen = ({ componentId }) => {
         id: id,
         passProps: {
           artistId: id,
-          artistName: name,
         },
         options: {
           topBar: {
