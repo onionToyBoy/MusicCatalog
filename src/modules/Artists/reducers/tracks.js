@@ -8,6 +8,7 @@ export const tracks = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_TRACKS: {
       const updatedTracks = { ...state.tracks, [action.payload.albumId]: action.payload.tracks };
+
       return {
         ...state,
         tracks: updatedTracks,
