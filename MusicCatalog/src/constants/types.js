@@ -1,1 +1,0 @@
-export const SEARCH_ARTISTS = 'SEARCH_ARTISTS';
