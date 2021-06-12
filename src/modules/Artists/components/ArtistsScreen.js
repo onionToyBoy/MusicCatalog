@@ -10,6 +10,7 @@ import { searchArtist } from '../thunks';
 import { routes } from '../../../constants/routes';
 import { SearchBar } from '../../../components/SearchBar';
 import { StartingNotification } from '../../../components/StartingNotification';
+import { NoResultsNotification } from '../../../components/NoResultsNotification';
 
 export const ArtistsScreen = ({ componentId }) => {
   const [searchValue, setSearchValue] = useState('');
@@ -43,14 +44,22 @@ export const ArtistsScreen = ({ componentId }) => {
 
   const renderArtists = ({ item }) => <Artist {...item} onOpenAlbum={onOpenAlbum} />;
 
+  const choiceNotification = (searchValue, artistsArray) => {
+    if (searchValue === '') {
+      return <StartingNotification />;
+    } else if (artistsArray.length === 0) {
+      return <NoResultsNotification />;
+    } else {
+      return (
+        <FlatList data={artists} keyExtractor={item => item.artistId} renderItem={renderArtists} />
+      );
+    }
+  };
+
   return (
     <View style={styles.container}>
       <SearchBar onSearch={setSearchValue} />
-      {artists.length === 0 ? (
-        <StartingNotification />
-      ) : (
-        <FlatList data={artists} keyExtractor={item => item.artistId} renderItem={renderArtists} />
-      )}
+      {choiceNotification(searchValue, artists)}
     </View>
   );
 };
