@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
+import { FlatList, View, StyleSheet, Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 
@@ -9,6 +9,7 @@ import { selectArtists } from '../selectors';
 import { searchArtist } from '../thunks';
 import { routes } from '../../../constants/routes';
 import { SearchBar } from '../../../components/SearchBar';
+import { StartingNotification } from '../../../components/StartingNotification';
 
 export const ArtistsScreen = ({ componentId }) => {
   const [searchValue, setSearchValue] = useState('');
@@ -45,7 +46,11 @@ export const ArtistsScreen = ({ componentId }) => {
   return (
     <View style={styles.container}>
       <SearchBar onSearch={setSearchValue} />
-      <FlatList data={artists} keyExtractor={item => item.artistId} renderItem={renderArtists} />
+      {artists.length === 0 ? (
+        <StartingNotification />
+      ) : (
+        <FlatList data={artists} keyExtractor={item => item.artistId} renderItem={renderArtists} />
+      )}
     </View>
   );
 };
