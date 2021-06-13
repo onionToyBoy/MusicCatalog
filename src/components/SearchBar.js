@@ -6,9 +6,7 @@ import { symbols } from '../constants/symbols';
 
 export const SearchBar = ({ onSearch, clearInput, searchValue }) => {
   const crossStylesCreator = () => {
-    return searchValue === ''
-      ? { color: colors.BRIGHT_GRAY, fontSize: 25 }
-      : { color: colors.WHITE, fontSize: 25 };
+    return searchValue === '' ? { color: colors.DARK_GRAY } : { color: colors.WHITE, fontSize: 30 };
   };
 
   return (
@@ -43,8 +41,6 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   crossContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 10,
+    paddingHorizontal: 12,
   },
 });

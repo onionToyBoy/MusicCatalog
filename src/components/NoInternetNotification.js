@@ -4,11 +4,11 @@ import { View, StyleSheet, Text } from 'react-native';
 import { colors } from '../constants/colors';
 import { symbols } from '../constants/symbols';
 
-export const NoResultsNotification = () => {
+export const NoInternetNotification = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.clef}>{symbols.BASS_CLEF}</Text>
-      <Text style={styles.text}>NOT FOUND</Text>
+      <Text style={styles.warning}>{symbols.WARNING}</Text>
+      <Text style={styles.text}>No Internet Secured</Text>
     </View>
   );
 };
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  clef: {
+  warning: {
     color: colors.BRIGHT_GRAY,
     fontSize: 130,
   },
