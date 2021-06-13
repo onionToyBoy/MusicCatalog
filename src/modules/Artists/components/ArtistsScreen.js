@@ -27,7 +27,6 @@ export const ArtistsScreen = ({ componentId }) => {
     Navigation.push(componentId, {
       component: {
         name: routes.ArtistsAlbums,
-        id: id,
         passProps: {
           artistId: id,
         },
@@ -41,6 +40,8 @@ export const ArtistsScreen = ({ componentId }) => {
       },
     });
   };
+
+  const clearInput = () => setSearchValue('');
 
   const renderArtists = ({ item }) => <Artist {...item} onOpenAlbum={onOpenAlbum} />;
 
@@ -58,7 +59,7 @@ export const ArtistsScreen = ({ componentId }) => {
 
   return (
     <View style={styles.container}>
-      <SearchBar onSearch={setSearchValue} />
+      <SearchBar onSearch={setSearchValue} clearInput={clearInput} searchValue={searchValue}/>
       {choiceNotification(searchValue, artists)}
     </View>
   );
