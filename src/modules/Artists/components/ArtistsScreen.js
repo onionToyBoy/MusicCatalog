@@ -45,10 +45,10 @@ export const ArtistsScreen = ({ componentId }) => {
 
   const renderArtists = ({ item }) => <Artist {...item} onOpenAlbum={onOpenAlbum} />;
 
-  const choiceNotification = (searchValue, artistsArray) => {
+  const choiceNotification = () => {
     if (searchValue === '') {
       return <StartingNotification />;
-    } else if (artistsArray.length === 0) {
+    } else if (artists.length === 0) {
       return <NoResultsNotification />;
     } else {
       return (
@@ -59,8 +59,8 @@ export const ArtistsScreen = ({ componentId }) => {
 
   return (
     <View style={styles.container}>
-      <SearchBar onSearch={setSearchValue} clearInput={clearInput} searchValue={searchValue}/>
-      {choiceNotification(searchValue, artists)}
+      <SearchBar onSearch={setSearchValue} clearInput={clearInput} searchValue={searchValue} />
+      {choiceNotification()}
     </View>
   );
 };
