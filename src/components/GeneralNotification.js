@@ -2,13 +2,12 @@ import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 
 import { colors } from '../constants/colors';
-import { symbols } from '../constants/symbols';
 
-export const NoInternetNotification = () => {
+export const GeneralNotification = ({ symbol, text, style }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.warning}>{symbols.WARNING}</Text>
-      <Text style={styles.text}>No Internet Secured</Text>
+      <Text style={[styles.clef, style]}>{symbol}</Text>
+      <Text style={[styles.text, style]}>{text}</Text>
     </View>
   );
 };
@@ -19,12 +18,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  warning: {
-    color: colors.GOLD,
+  clef: {
+    color: colors.BRIGHT_GRAY,
     fontSize: 130,
   },
   text: {
-    color: 'red',
+    color: colors.BRIGHT_GRAY,
     fontSize: 20,
   },
 });

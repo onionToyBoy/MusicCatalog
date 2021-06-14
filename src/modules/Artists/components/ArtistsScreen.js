@@ -5,14 +5,13 @@ import { Navigation } from 'react-native-navigation';
 import { useNetInfo } from '@react-native-community/netinfo';
 
 import { colors } from '../../../constants/colors';
+import { symbols } from '../../../constants/symbols';
 import { Artist } from './Artist';
 import { selectArtists } from '../selectors';
 import { searchArtist } from '../thunks';
 import { routes } from '../../../constants/routes';
 import { SearchBar } from '../../../components/SearchBar';
-import { StartingNotification } from '../../../components/StartingNotification';
-import { NoResultsNotification } from '../../../components/NoResultsNotification';
-import { NoInternetNotification } from '../../../components/NoInternetNotification';
+import { GeneralNotification } from '../../../components/GeneralNotification';
 
 export const ArtistsScreen = ({ componentId }) => {
   const [searchValue, setSearchValue] = useState('');
@@ -52,17 +51,25 @@ export const ArtistsScreen = ({ componentId }) => {
   return (
     <View style={styles.container}>
       <SearchBar onSearch={setSearchValue} clearInput={clearInput} searchValue={searchValue} />
-      {!isConnected && <NoInternetNotification />}
+      {!isConnected && (
+        <GeneralNotification
+          symbol={symbols.WARNING}
+          text={'NO INTERNET'}
+          style={{ color: colors.RED }}
+        />
+      )}
       {isConnected &&
         (searchValue ? (
           <FlatList
             data={artists}
             keyExtractor={item => item.artistId}
             renderItem={renderArtists}
-            ListEmptyComponent={NoResultsNotification}
+            ListEmptyComponent={
+              <GeneralNotification symbol={symbols.BASS_CLEF} text={'NOT FINED'} />
+            }
           />
         ) : (
-          <StartingNotification />
+          <GeneralNotification symbol={symbols.NOTE} text={'Search your artist'} />
         ))}
     </View>
   );
