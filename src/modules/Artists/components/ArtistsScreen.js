@@ -16,13 +16,13 @@ import { NoInternetNotification } from '../../../components/NoInternetNotificati
 
 export const ArtistsScreen = ({ componentId }) => {
   const [searchValue, setSearchValue] = useState('');
-  const [intenetConnection, setInternetConnection] = useState(false);
+  const [connectionStatus, setConnectionStatus] = useState(false);
 
   const dispatch = useDispatch();
 
   const artists = useSelector(selectArtists);
 
-  NetInfo.fetch().then(state => setInternetConnection(state.isConnected));
+  NetInfo.fetch().then(state => setConnectionStatus(state.isConnected));
 
   useEffect(() => {
     dispatch(searchArtist(searchValue));
@@ -51,7 +51,7 @@ export const ArtistsScreen = ({ componentId }) => {
   const renderArtists = ({ item }) => <Artist {...item} onOpenAlbum={onOpenAlbum} />;
 
   const choiceNotification = () => {
-    if (!intenetConnection) {
+    if (!connectionStatus) {
       return <NoInternetNotification />;
     }
     if (searchValue === '') {
