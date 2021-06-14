@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, View, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
-import NetInfo from '@react-native-community/netinfo';
+import { useNetInfo } from '@react-native-community/netinfo';
 
 import { colors } from '../../../constants/colors';
 import { Artist } from './Artist';
@@ -16,13 +16,12 @@ import { NoInternetNotification } from '../../../components/NoInternetNotificati
 
 export const ArtistsScreen = ({ componentId }) => {
   const [searchValue, setSearchValue] = useState('');
-  const [connectionStatus, setConnectionStatus] = useState(false);
 
   const dispatch = useDispatch();
 
   const artists = useSelector(selectArtists);
 
-  NetInfo.fetch().then(state => setConnectionStatus(state.isConnected));
+  const { isConnected } = useNetInfo();
 
   useEffect(() => {
     dispatch(searchArtist(searchValue));
@@ -50,25 +49,21 @@ export const ArtistsScreen = ({ componentId }) => {
 
   const renderArtists = ({ item }) => <Artist {...item} onOpenAlbum={onOpenAlbum} />;
 
-  const choiceNotification = () => {
-    if (!connectionStatus) {
-      return <NoInternetNotification />;
-    }
-    if (searchValue === '') {
-      return <StartingNotification />;
-    } else if (artists.length === 0) {
-      return <NoResultsNotification />;
-    } else {
-      return (
-        <FlatList data={artists} keyExtractor={item => item.artistId} renderItem={renderArtists} />
-      );
-    }
-  };
-
   return (
     <View style={styles.container}>
       <SearchBar onSearch={setSearchValue} clearInput={clearInput} searchValue={searchValue} />
-      {choiceNotification()}
+      {!isConnected && <NoInternetNotification />}
+      {isConnected &&
+        (searchValue ? (
+          <FlatList
+            data={artists}
+            keyExtractor={item => item.artistId}
+            renderItem={renderArtists}
+            ListEmptyComponent={NoResultsNotification}
+          />
+        ) : (
+          <StartingNotification />
+        ))}
     </View>
   );
 };

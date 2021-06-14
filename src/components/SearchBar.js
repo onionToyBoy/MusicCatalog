@@ -5,9 +5,9 @@ import { colors } from '../constants/colors';
 import { symbols } from '../constants/symbols';
 
 export const SearchBar = ({ onSearch, clearInput, searchValue }) => {
-  const crossStylesCreator = () => {
-    return searchValue === '' ? { color: colors.DARK_GRAY } : { color: colors.WHITE, fontSize: 30 };
-  };
+  const crossStyle = !searchValue
+    ? { color: colors.DARK_GRAY }
+    : { color: colors.WHITE, fontSize: 30 };
 
   return (
     <View style={styles.container}>
@@ -20,7 +20,7 @@ export const SearchBar = ({ onSearch, clearInput, searchValue }) => {
         maxLength={30}
       />
       <TouchableOpacity style={styles.crossContainer} onPress={clearInput}>
-        <Text style={crossStylesCreator()}>{symbols.CROSS}</Text>
+        <Text style={crossStyle}>{symbols.CROSS}</Text>
       </TouchableOpacity>
     </View>
   );

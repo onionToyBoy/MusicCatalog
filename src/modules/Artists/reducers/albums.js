@@ -2,6 +2,7 @@ import { SET_ALBUMS } from '../../../constants/actionsTypes';
 
 const INITIAL_STATE = {
   albums: {},
+  tabNotification: '',
 };
 
 export const albums = (state = INITIAL_STATE, action) => {

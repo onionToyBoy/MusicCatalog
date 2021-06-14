@@ -20,11 +20,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   warning: {
-    color: colors.BRIGHT_GRAY,
+    color: colors.GOLD,
     fontSize: 130,
   },
   text: {
-    color: colors.BRIGHT_GRAY,
+    color: 'red',
     fontSize: 20,
   },
 });
