@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
+import { FlatList, View, StyleSheet, Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 import { useNetInfo } from '@react-native-community/netinfo';
@@ -7,11 +7,12 @@ import { useNetInfo } from '@react-native-community/netinfo';
 import { colors } from '../../../constants/colors';
 import { symbols } from '../../../constants/symbols';
 import { Artist } from './Artist';
-import { selectArtists } from '../selectors';
+import { loadingStatus, selectArtists } from '../selectors';
 import { searchArtist } from '../thunks';
 import { routes } from '../../../constants/routes';
 import { SearchBar } from '../../../components/SearchBar';
 import { GeneralNotification } from '../../../components/GeneralNotification';
+import { Spinner } from '../../../components/Spinner';
 
 export const ArtistsScreen = ({ componentId }) => {
   const [searchValue, setSearchValue] = useState('');
@@ -19,6 +20,8 @@ export const ArtistsScreen = ({ componentId }) => {
   const dispatch = useDispatch();
 
   const artists = useSelector(selectArtists);
+
+  const isLoading = useSelector(loadingStatus);
 
   const { isConnected } = useNetInfo();
 
@@ -71,6 +74,7 @@ export const ArtistsScreen = ({ componentId }) => {
         ) : (
           <GeneralNotification symbol={symbols.NOTE} text={'Search your artist'} />
         ))}
+      {isLoading && <Spinner />}
     </View>
   );
 };

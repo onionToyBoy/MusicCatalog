@@ -1,4 +1,10 @@
-import { SET_ALBUMS, SET_ARTISTS, SET_TRACKS } from '../../../constants/actionsTypes';
+import {
+  SET_ALBUMS,
+  SET_ARTISTS,
+  SET_TRACKS,
+  START_OF_LOADING,
+  END_OF_LOADING,
+} from '../../../constants/actionsTypes';
 
 export const setAlbums = (albums, artistId) => {
   return {
@@ -24,5 +30,17 @@ export const setTracks = (tracks, albumId) => {
       tracks: tracks,
       albumId: albumId,
     },
+  };
+};
+
+export const startOfLoading = () => {
+  return {
+    type: START_OF_LOADING,
+  };
+};
+
+export const endOfLoading = () => {
+  return {
+    type: END_OF_LOADING,
   };
 };

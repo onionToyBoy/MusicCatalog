@@ -3,14 +3,17 @@ import { View, StyleSheet, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { colors } from '../../../constants/colors';
-import { selectTracks } from '../selectors';
+import { selectTracks, loadingStatus } from '../selectors';
 import { getTracks } from '../thunks';
 import { Track } from './Track';
+import { Spinner } from '../../../components/Spinner';
 
 export const AlbumTracks = ({ albumId }) => {
   const dispatch = useDispatch();
 
   const tracks = useSelector(selectTracks(albumId));
+
+  const isLoading = useSelector(loadingStatus);
 
   useEffect(() => {
     dispatch(getTracks(albumId));
@@ -21,6 +24,7 @@ export const AlbumTracks = ({ albumId }) => {
   return (
     <View style={styles.container}>
       <FlatList data={tracks} keyExtractor={item => item.trackId} renderItem={renderTracks} />
+      {isLoading && <Spinner />}
     </View>
   );
 };
