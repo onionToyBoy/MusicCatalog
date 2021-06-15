@@ -44,7 +44,7 @@ export const ArtistsAlbums = ({ componentId, artistId }) => {
   return (
     <View style={styles.container}>
       <FlatList data={albums} keyExtractor={item => item.collectionId} renderItem={renderAlbums} />
-      {isLoading && <Spinner/>}
+      {isLoading && <Spinner />}
     </View>
   );
 };
