@@ -68,7 +68,7 @@ export const ArtistsScreen = ({ componentId }) => {
             keyExtractor={item => item.artistId}
             renderItem={renderArtists}
             ListEmptyComponent={
-              <GeneralNotification symbol={symbols.BASS_CLEF} text={'NOT FINED'} />
+              <GeneralNotification symbol={symbols.BASS_CLEF} text={'NOT FOUND'} />
             }
           />
         ) : (

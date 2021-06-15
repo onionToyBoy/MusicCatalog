@@ -20,6 +20,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF10',
+    backgroundColor: colors.OPACITY_WHITE,
   },
 });
