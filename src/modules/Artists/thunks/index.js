@@ -1,7 +1,6 @@
 import { searchArtists } from '../../../requests/searchArtists';
 import {
   endOfLoading,
-  removeError,
   setAlbums,
   setArtists,
   setError,
