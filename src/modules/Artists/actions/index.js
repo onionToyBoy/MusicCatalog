@@ -4,6 +4,8 @@ import {
   SET_TRACKS,
   START_OF_LOADING,
   END_OF_LOADING,
+  SET_ERROR,
+  REMOVE_ERROR,
 } from '../../../constants/actionsTypes';
 
 export const setAlbums = (albums, artistId) => {
@@ -42,5 +44,18 @@ export const startOfLoading = () => {
 export const endOfLoading = () => {
   return {
     type: END_OF_LOADING,
+  };
+};
+
+export const setError = error => {
+  return {
+    type: SET_ERROR,
+    payload: error,
+  };
+};
+
+export const removeError = () => {
+  return {
+    type: REMOVE_ERROR,
   };
 };

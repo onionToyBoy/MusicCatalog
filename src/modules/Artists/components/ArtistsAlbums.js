@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 
 import { colors } from '../../../constants/colors';
-import { loadingStatus, selectAlbums } from '../selectors';
+import { loadingStatus, selectAlbums, error } from '../selectors';
 import { getAlbums } from '../thunks';
 import { Album } from '../../Albums/components/Album';
 import { routes } from '../../../constants/routes';
 import { Spinner } from '../../../components/Spinner';
+import { ErrorAlert } from '../../../components/ErrorAlert';
 
 export const ArtistsAlbums = ({ componentId, artistId }) => {
   const dispatch = useDispatch();
@@ -16,6 +17,12 @@ export const ArtistsAlbums = ({ componentId, artistId }) => {
   const albums = useSelector(selectAlbums(artistId));
 
   const isLoading = useSelector(loadingStatus);
+
+  const isError = useSelector(error);
+
+  if (Object.keys(isError).length !== 0) {
+    ErrorAlert(dispatch);
+  }
 
   useEffect(() => {
     dispatch(getAlbums(artistId));

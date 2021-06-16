@@ -7,12 +7,13 @@ import { useNetInfo } from '@react-native-community/netinfo';
 import { colors } from '../../../constants/colors';
 import { symbols } from '../../../constants/symbols';
 import { Artist } from './Artist';
-import { loadingStatus, selectArtists } from '../selectors';
+import { error, loadingStatus, selectArtists } from '../selectors';
 import { searchArtist } from '../thunks';
 import { routes } from '../../../constants/routes';
 import { SearchBar } from '../../../components/SearchBar';
 import { GeneralNotification } from '../../../components/GeneralNotification';
 import { Spinner } from '../../../components/Spinner';
+import { ErrorAlert } from '../../../components/ErrorAlert';
 
 export const ArtistsScreen = ({ componentId }) => {
   const [searchValue, setSearchValue] = useState('');
@@ -22,6 +23,12 @@ export const ArtistsScreen = ({ componentId }) => {
   const artists = useSelector(selectArtists);
 
   const isLoading = useSelector(loadingStatus);
+
+  const isError = useSelector(error);
+
+  if (Object.keys(isError).length !== 0) {
+    ErrorAlert(dispatch);
+  }
 
   const { isConnected } = useNetInfo();
 
