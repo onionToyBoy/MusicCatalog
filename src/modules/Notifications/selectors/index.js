@@ -1,3 +1,3 @@
-export const selectIsLoading = state => state.loadingReducer.isLoading;
+export const selectIsLoading = state => state.notificationReducer.isLoading;
 
-export const selectIsError = state => state.errorReducer.isError;
+export const selectIsError = state => state.notificationReducer.isError;

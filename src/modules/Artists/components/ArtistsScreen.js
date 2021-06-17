@@ -7,14 +7,11 @@ import { useNetInfo } from '@react-native-community/netinfo';
 import { colors } from '../../../constants/colors';
 import { symbols } from '../../../constants/symbols';
 import { Artist } from './Artist';
-import { error, loadingStatus, selectArtists } from '../selectors';
+import { selectArtists } from '../selectors';
 import { searchArtist } from '../thunks';
 import { routes } from '../../../constants/routes';
 import { SearchBar } from '../../../components/SearchBar';
-import { GeneralNotification } from '../../Notifications/components/GeneralNotification';
-import { Spinner } from '../../Notifications/components/Spinner';
-import { ErrorAlert } from '../../../components/ErrorAlert';
-import { setErrorStatus } from '../actions';
+import { GeneralNotification } from '../../../components/GeneralNotification';
 
 export const ArtistsScreen = ({ componentId }) => {
   const [searchValue, setSearchValue] = useState('');
@@ -22,16 +19,6 @@ export const ArtistsScreen = ({ componentId }) => {
   const dispatch = useDispatch();
 
   const artists = useSelector(selectArtists);
-  const isLoading = useSelector(loadingStatus);
-  const isError = useSelector(error);
-
-  const onSubmit = () => dispatch(setErrorStatus(false));
-
-  useEffect(() => {
-    if (isError){
-      ErrorAlert(onSubmit);
-    }
-  }, [isError, onSubmit]);
 
   const { isConnected } = useNetInfo();
 
@@ -74,6 +61,7 @@ export const ArtistsScreen = ({ componentId }) => {
       {isConnected &&
         (searchValue ? (
           <FlatList
+            contentContainerStyle={{ flexGrow: 1 }}
             data={artists}
             keyExtractor={item => item.artistId}
             renderItem={renderArtists}

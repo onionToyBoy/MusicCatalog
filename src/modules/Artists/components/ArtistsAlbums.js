@@ -4,28 +4,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 
 import { colors } from '../../../constants/colors';
-import { loadingStatus, selectAlbums, error } from '../selectors';
+import { selectAlbums } from '../selectors';
 import { getAlbums } from '../thunks';
 import { Album } from '../../Albums/components/Album';
 import { routes } from '../../../constants/routes';
-import { Spinner } from '../../Notifications/components/Spinner';
-import { ErrorAlert } from '../../../components/ErrorAlert';
-import { setErrorStatus } from '../actions';
 
 export const ArtistsAlbums = ({ componentId, artistId }) => {
   const dispatch = useDispatch();
 
   const albums = useSelector(selectAlbums(artistId));
-  const isLoading = useSelector(loadingStatus);
-  const isError = useSelector(error);
-
-  const onSubmit = () => dispatch(setErrorStatus(false));
-
-  useEffect(() => {
-    if (isError){
-      ErrorAlert(onSubmit);
-    }
-  }, [isError, onSubmit]);
 
   useEffect(() => {
     dispatch(getAlbums(artistId));
@@ -54,7 +41,6 @@ export const ArtistsAlbums = ({ componentId, artistId }) => {
   return (
     <View style={styles.container}>
       <FlatList data={albums} keyExtractor={item => item.collectionId} renderItem={renderAlbums} />
-      {isLoading && <Spinner />}
     </View>
   );
 };
