@@ -1,5 +1,5 @@
-export const selectArtists = state => state.artistReducer.artists;
+export const selectArtists = state => state.artistsReducer.artists;
 
-export const selectAlbums = artistId => state => state.albumReducer.albums[artistId];
+export const selectAlbums = artistId => state => state.artistsReducer.albums[artistId];
 
-export const selectTracks = albumId => state => state.trackReducer.tracks[albumId];
+export const selectTracks = albumId => state => state.artistsReducer.tracks[albumId];

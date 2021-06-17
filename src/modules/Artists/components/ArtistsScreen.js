@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, View, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
+import { useNetInfo } from '@react-native-community/netinfo';
 
 import { colors } from '../../../constants/colors';
+import { symbols } from '../../../constants/symbols';
 import { Artist } from './Artist';
 import { selectArtists } from '../selectors';
 import { searchArtist } from '../thunks';
 import { routes } from '../../../constants/routes';
 import { SearchBar } from '../../../components/SearchBar';
+import { GeneralNotification } from '../../../components/GeneralNotification';
 
 export const ArtistsScreen = ({ componentId }) => {
   const [searchValue, setSearchValue] = useState('');
@@ -16,6 +19,8 @@ export const ArtistsScreen = ({ componentId }) => {
   const dispatch = useDispatch();
 
   const artists = useSelector(selectArtists);
+
+  const { isConnected } = useNetInfo();
 
   useEffect(() => {
     dispatch(searchArtist(searchValue));
@@ -25,7 +30,6 @@ export const ArtistsScreen = ({ componentId }) => {
     Navigation.push(componentId, {
       component: {
         name: routes.ArtistsAlbums,
-        id: id,
         passProps: {
           artistId: id,
         },
@@ -40,12 +44,34 @@ export const ArtistsScreen = ({ componentId }) => {
     });
   };
 
+  const clearInput = () => setSearchValue('');
+
   const renderArtists = ({ item }) => <Artist {...item} onOpenAlbum={onOpenAlbum} />;
 
   return (
     <View style={styles.container}>
-      <SearchBar onSearch={setSearchValue} />
-      <FlatList data={artists} keyExtractor={item => item.artistId} renderItem={renderArtists} />
+      <SearchBar onSearch={setSearchValue} clearInput={clearInput} searchValue={searchValue} />
+      {!isConnected && (
+        <GeneralNotification
+          symbol={symbols.WARNING}
+          text={'NO INTERNET'}
+          notificationColor={colors.RED}
+        />
+      )}
+      {isConnected &&
+        (searchValue ? (
+          <FlatList
+            contentContainerStyle={{ flexGrow: 1 }}
+            data={artists}
+            keyExtractor={item => item.artistId}
+            renderItem={renderArtists}
+            ListEmptyComponent={
+              <GeneralNotification symbol={symbols.BASS_CLEF} text={'NOT FOUND'} />
+            }
+          />
+        ) : (
+          <GeneralNotification symbol={symbols.NOTE} text={'Search your artist'} />
+        ))}
     </View>
   );
 };
