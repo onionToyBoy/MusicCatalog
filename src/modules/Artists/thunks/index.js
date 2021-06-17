@@ -1,24 +1,19 @@
 import { searchArtists } from '../../../requests/searchArtists';
-import {
-  endOfLoading,
-  setAlbums,
-  setArtists,
-  setError,
-  setTracks,
-  startOfLoading,
-} from '../actions';
+import { setAlbums, setArtists, setErrorStatus, setTracks, setLoadingStatus } from '../actions';
 import { getSpecificTracks } from '../../../requests/getSpecificTracks';
 import { getSpecificAlbums } from '../../../requests/getSpecificAlbums';
 
-export function searchArtist(searchValue = 'artist') {
+export function searchArtist(searchValue) {
   return async dispatch => {
     try {
-      dispatch(startOfLoading());
+      dispatch(setLoadingStatus(true));
       const artists = await searchArtists(searchValue);
       dispatch(setArtists(artists.results));
-      dispatch(endOfLoading());
+      dispatch(setLoadingStatus(false));
     } catch (err) {
-      dispatch(setError(err));
+      dispatch(setErrorStatus(true));
+    } finally {
+      dispatch(setLoadingStatus(false));
     }
   };
 }
@@ -26,12 +21,14 @@ export function searchArtist(searchValue = 'artist') {
 export function getAlbums(artistId) {
   return async dispatch => {
     try {
-      dispatch(startOfLoading());
+      dispatch(setLoadingStatus(true));
       const albums = await getSpecificAlbums(artistId);
       dispatch(setAlbums(albums.results.slice(1), artistId));
-      dispatch(endOfLoading());
+      dispatch(setLoadingStatus(false));
     } catch (err) {
-      dispatch(setError(err));
+      dispatch(setErrorStatus(true));
+    } finally {
+      dispatch(setLoadingStatus(false));
     }
   };
 }
@@ -39,12 +36,14 @@ export function getAlbums(artistId) {
 export function getTracks(albumId) {
   return async dispatch => {
     try {
-      dispatch(startOfLoading());
+      dispatch(setLoadingStatus(true));
       const albums = await getSpecificTracks(albumId);
       dispatch(setTracks(albums.results.slice(1), albumId));
-      dispatch(endOfLoading());
+      dispatch(setLoadingStatus(false));
     } catch (err) {
-      dispatch(setError(err));
+      dispatch(setErrorStatus(true));
+    } finally {
+      dispatch(setLoadingStatus(false));
     }
   };
 }

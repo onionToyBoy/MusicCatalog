@@ -2,10 +2,8 @@ import {
   SET_ALBUMS,
   SET_ARTISTS,
   SET_TRACKS,
-  START_OF_LOADING,
-  END_OF_LOADING,
-  SET_ERROR,
-  REMOVE_ERROR,
+  SET_LOADING_STATUS,
+  SET_ERROR_STATUS,
 } from '../../../constants/actionsTypes';
 
 export const setAlbums = (albums, artistId) => {
@@ -35,27 +33,16 @@ export const setTracks = (tracks, albumId) => {
   };
 };
 
-export const startOfLoading = () => {
+export const setLoadingStatus = isLoading => {
   return {
-    type: START_OF_LOADING,
+    type: SET_LOADING_STATUS,
+    payload: isLoading,
   };
 };
 
-export const endOfLoading = () => {
+export const setErrorStatus = isError => {
   return {
-    type: END_OF_LOADING,
-  };
-};
-
-export const setError = error => {
-  return {
-    type: SET_ERROR,
-    payload: error,
-  };
-};
-
-export const removeError = () => {
-  return {
-    type: REMOVE_ERROR,
+    type: SET_ERROR_STATUS,
+    payload: isError,
   };
 };

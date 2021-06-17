@@ -11,9 +11,10 @@ import { error, loadingStatus, selectArtists } from '../selectors';
 import { searchArtist } from '../thunks';
 import { routes } from '../../../constants/routes';
 import { SearchBar } from '../../../components/SearchBar';
-import { GeneralNotification } from '../../../components/GeneralNotification';
-import { Spinner } from '../../../components/Spinner';
+import { GeneralNotification } from '../../Notifications/components/GeneralNotification';
+import { Spinner } from '../../Notifications/components/Spinner';
 import { ErrorAlert } from '../../../components/ErrorAlert';
+import { setErrorStatus } from '../actions';
 
 export const ArtistsScreen = ({ componentId }) => {
   const [searchValue, setSearchValue] = useState('');
@@ -21,14 +22,16 @@ export const ArtistsScreen = ({ componentId }) => {
   const dispatch = useDispatch();
 
   const artists = useSelector(selectArtists);
-
   const isLoading = useSelector(loadingStatus);
-
   const isError = useSelector(error);
 
-  if (Object.keys(isError).length !== 0) {
-    ErrorAlert(dispatch);
-  }
+  const onSubmit = () => dispatch(setErrorStatus(false));
+
+  useEffect(() => {
+    if (isError){
+      ErrorAlert(onSubmit);
+    }
+  }, [isError, onSubmit]);
 
   const { isConnected } = useNetInfo();
 
@@ -65,7 +68,7 @@ export const ArtistsScreen = ({ componentId }) => {
         <GeneralNotification
           symbol={symbols.WARNING}
           text={'NO INTERNET'}
-          style={{ color: colors.RED }}
+          notificationColor={colors.RED}
         />
       )}
       {isConnected &&
@@ -81,7 +84,6 @@ export const ArtistsScreen = ({ componentId }) => {
         ) : (
           <GeneralNotification symbol={symbols.NOTE} text={'Search your artist'} />
         ))}
-      {isLoading && <Spinner />}
     </View>
   );
 };

@@ -8,21 +8,24 @@ import { loadingStatus, selectAlbums, error } from '../selectors';
 import { getAlbums } from '../thunks';
 import { Album } from '../../Albums/components/Album';
 import { routes } from '../../../constants/routes';
-import { Spinner } from '../../../components/Spinner';
+import { Spinner } from '../../Notifications/components/Spinner';
 import { ErrorAlert } from '../../../components/ErrorAlert';
+import { setErrorStatus } from '../actions';
 
 export const ArtistsAlbums = ({ componentId, artistId }) => {
   const dispatch = useDispatch();
 
   const albums = useSelector(selectAlbums(artistId));
-
   const isLoading = useSelector(loadingStatus);
-
   const isError = useSelector(error);
 
-  if (Object.keys(isError).length !== 0) {
-    ErrorAlert(dispatch);
-  }
+  const onSubmit = () => dispatch(setErrorStatus(false));
+
+  useEffect(() => {
+    if (isError){
+      ErrorAlert(onSubmit);
+    }
+  }, [isError, onSubmit]);
 
   useEffect(() => {
     dispatch(getAlbums(artistId));

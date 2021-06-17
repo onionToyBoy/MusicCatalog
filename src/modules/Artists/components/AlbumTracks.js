@@ -6,21 +6,24 @@ import { colors } from '../../../constants/colors';
 import { selectTracks, loadingStatus, error } from '../selectors';
 import { getTracks } from '../thunks';
 import { Track } from './Track';
-import { Spinner } from '../../../components/Spinner';
+import { Spinner } from '../../Notifications/components/Spinner';
 import { ErrorAlert } from '../../../components/ErrorAlert';
+import { setErrorStatus } from '../actions';
 
 export const AlbumTracks = ({ albumId }) => {
   const dispatch = useDispatch();
 
   const tracks = useSelector(selectTracks(albumId));
-
   const isLoading = useSelector(loadingStatus);
-
   const isError = useSelector(error);
 
-  if (Object.keys(isError).length !== 0) {
-    ErrorAlert(dispatch);
-  }
+  const onSubmit = () => dispatch(setErrorStatus(false));
+
+  useEffect(() => {
+    if (isError){
+      ErrorAlert(onSubmit);
+    }
+  }, [isError, onSubmit]);
 
   useEffect(() => {
     dispatch(getTracks(albumId));
@@ -31,7 +34,6 @@ export const AlbumTracks = ({ albumId }) => {
   return (
     <View style={styles.container}>
       <FlatList data={tracks} keyExtractor={item => item.trackId} renderItem={renderTracks} />
-      {isLoading && <Spinner />}
     </View>
   );
 };

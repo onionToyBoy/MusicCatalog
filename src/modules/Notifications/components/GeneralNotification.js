@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 
-import { colors } from '../constants/colors';
+import { colors } from '../../../constants/colors';
 
-export const GeneralNotification = ({ symbol, text, style }) => {
+export const GeneralNotification = ({ symbol, text, notificationColor = colors.BRIGHT_GRAY }) => {
   return (
     <View style={styles.container}>
-      <Text style={[styles.clef, style]}>{symbol}</Text>
-      <Text style={[styles.text, style]}>{text}</Text>
+      <Text style={[styles.symbol, { color: notificationColor }]}>{symbol}</Text>
+      <Text style={[styles.text, { color: notificationColor }]}>{text}</Text>
     </View>
   );
 };
@@ -18,12 +18,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  clef: {
-    color: colors.BRIGHT_GRAY,
+  symbol: {
     fontSize: 130,
   },
   text: {
-    color: colors.BRIGHT_GRAY,
     fontSize: 20,
   },
 });
