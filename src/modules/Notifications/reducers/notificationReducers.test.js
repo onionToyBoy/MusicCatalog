@@ -1,7 +1,7 @@
 import { notificationReducer } from '.';
 import { setErrorStatus, setLoadingStatus } from '../actions';
 
-test('Loading status will be changed to true', () => {
+test('Loading status should be changed to true', () => {
   const state = {
     isLoading: false,
   };
@@ -9,7 +9,7 @@ test('Loading status will be changed to true', () => {
   expect(newState.isLoading).toBe(true);
 });
 
-test('Loading status will be changed to false', () => {
+test('Loading status should be changed to false', () => {
   const state = {
     isLoading: true,
   };
@@ -17,7 +17,7 @@ test('Loading status will be changed to false', () => {
   expect(newState.isLoading).toBe(false);
 });
 
-test('Error status will be changed to true', () => {
+test('Error status should be changed to true', () => {
   const state = {
     isError: false,
   };
@@ -25,10 +25,10 @@ test('Error status will be changed to true', () => {
   expect(newState.isError).toBe(true);
 });
 
-test('Error status will be changed to false', () => {
-  let state = {
+test('Error status should be changed to false', () => {
+  const state = {
     isError: true,
   };
-  let newState = notificationReducer(state, setErrorStatus(false));
+  const newState = notificationReducer(state, setErrorStatus(false));
   expect(newState.isError).toBe(false);
 });
