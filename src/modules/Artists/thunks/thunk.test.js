@@ -35,12 +35,6 @@ const albumsResult = {
       artistName: 'Team Sleep',
       collectionName: 'Woodstock Sessions, Vol. 4',
     },
-    {
-      artistId: 59080604,
-      collectionId: 59080607,
-      artistName: 'Team Sleep',
-      collectionName: 'Ever (Foreign Flag) - Single',
-    },
   ],
 };
 
