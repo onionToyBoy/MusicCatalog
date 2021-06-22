@@ -1,34 +1,22 @@
-import { notificationReducer } from '.';
+import { INITIAL_STATE, notificationReducer } from './index';
 import { setErrorStatus, setLoadingStatus } from '../actions';
 
-test('Loading status should be changed to true', () => {
-  const state = {
-    isLoading: false,
-  };
-  const newState = notificationReducer(state, setLoadingStatus(true));
-  expect(newState.isLoading).toBe(true);
-});
+describe('Notification reducers', () => {
+  test('Loading status should be changed to true', () => {
+    const newState = notificationReducer(INITIAL_STATE, setLoadingStatus(true));
 
-test('Loading status should be changed to false', () => {
-  const state = {
-    isLoading: true,
-  };
-  const newState = notificationReducer(state, setLoadingStatus(false));
-  expect(newState.isLoading).toBe(false);
-});
+    expect(newState.isLoading).toBe(true);
+  });
 
-test('Error status should be changed to true', () => {
-  const state = {
-    isError: false,
-  };
-  const newState = notificationReducer(state, setErrorStatus(true));
-  expect(newState.isError).toBe(true);
-});
+  test('Error status should be changed to true', () => {
+    const newState = notificationReducer(INITIAL_STATE, setErrorStatus(true));
 
-test('Error status should be changed to false', () => {
-  const state = {
-    isError: true,
-  };
-  const newState = notificationReducer(state, setErrorStatus(false));
-  expect(newState.isError).toBe(false);
+    expect(newState.isError).toBe(true);
+  });
+
+  test('Default section should be returned initial state', () => {
+    const newState = notificationReducer(INITIAL_STATE, {});
+
+    expect(newState).toBe(INITIAL_STATE);
+  });
 });

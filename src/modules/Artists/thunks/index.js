@@ -41,8 +41,8 @@ export function getTracks(albumId) {
     try {
       dispatch(setLoadingStatus(true));
 
-      const albums = await getSpecificTracks(albumId);
-      const updatedTracks = albums.results.slice(1);
+      const tracks = await getSpecificTracks(albumId);
+      const updatedTracks = tracks.results.slice(1);
 
       dispatch(setTracks(updatedTracks, albumId));
     } catch (err) {

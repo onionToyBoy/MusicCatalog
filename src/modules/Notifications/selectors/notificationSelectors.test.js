@@ -1,28 +1,18 @@
-import { selectIsError, selectIsLoading } from '.';
+import { selectIsError, selectIsLoading } from './index';
 
-const state = {
-  notificationReducer: {
-    isError: true,
-    isLoading: false,
-  },
-};
+describe('Notification selector', () => {
+  const state = {
+    notificationReducer: {
+      isError: true,
+      isLoading: false,
+    },
+  };
 
-test('selectIsLoading selector should be returned boolean ', () => {
-  const result = selectIsLoading(state);
-  expect(typeof result).toBe('boolean');
-});
+  test('selectIsLoading selector should be returned value of isLoading', () => {
+    expect(selectIsLoading(state)).toBe(state.notificationReducer.isLoading);
+  });
 
-test('selectIsLoading selector should be returned value of isLoading', () => {
-  const result = selectIsLoading(state);
-  expect(result).toBe(false);
-});
-
-test('selectIsError selector should be returned boolean ', () => {
-  const result = selectIsError(state);
-  expect(typeof result).toBe('boolean');
-});
-
-test('selectIsError selector should be returned value of IsError', () => {
-  const result = selectIsError(state);
-  expect(result).toBe(true);
+  test('selectIsError selector should be returned value of IsError', () => {
+    expect(selectIsError(state)).toBe(state.notificationReducer.isError);
+  });
 });

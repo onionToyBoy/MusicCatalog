@@ -1,6 +1,6 @@
 import { SET_ERROR_STATUS, SET_LOADING_STATUS } from '../../../constants/actionsTypes';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   isError: false,
   isLoading: false,
 };
