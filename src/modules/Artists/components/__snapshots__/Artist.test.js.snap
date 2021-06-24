@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Artist test  1`] = `ShallowWrapper {}`;
+
+exports[`Artist test Props in Artist component should be correct 1`] = `ShallowWrapper {}`;
