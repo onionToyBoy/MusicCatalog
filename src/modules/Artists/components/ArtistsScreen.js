@@ -53,6 +53,7 @@ export const ArtistsScreen = ({ componentId }) => {
       <SearchBar onSearch={setSearchValue} clearInput={clearInput} searchValue={searchValue} />
       {!isConnected && (
         <GeneralNotification
+          testId={'Warning-notification'}
           symbol={symbols.WARNING}
           text={'NO INTERNET'}
           notificationColor={colors.RED}
@@ -70,7 +71,11 @@ export const ArtistsScreen = ({ componentId }) => {
             }
           />
         ) : (
-          <GeneralNotification symbol={symbols.NOTE} text={'Search your artist'} />
+          <GeneralNotification
+            testId={'Welcome-notification'}
+            symbol={symbols.NOTE}
+            text={'Search your artist'}
+          />
         ))}
     </View>
   );
