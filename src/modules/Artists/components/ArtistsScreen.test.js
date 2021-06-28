@@ -16,6 +16,14 @@ jest.mock('react-redux', () => ({
 
 describe('ArtistsScreen test', () => {
   const componentId = '123';
+  const data = [
+    {
+      artistName: 'Deftones',
+      primaryGenreName: 'Rock',
+      artistId: 123,
+    },
+    { artistName: 'Dance party dance dance', primaryGenreName: 'pop', artistId: 623 },
+  ];
 
   test(' Renders warning notification when isConnected is false', () => {
     const wrapper = shallow(<ArtistsScreen componentId={componentId} />);
