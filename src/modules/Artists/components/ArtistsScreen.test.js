@@ -16,6 +16,11 @@ jest.mock('react-redux', () => ({
 
 describe('ArtistsScreen test', () => {
   const componentId = '123';
+  const artists = [
+    { artistName: 'Rob Zombie', artistId: 110374 },
+    { artistName: 'Cypres hill', artistId: 1449305168 },
+    { artistName: 'Navel', artistId: 1530211376 },
+  ];
 
   test(' Renders warning notification when isConnected is false', () => {
     const wrapper = shallow(<ArtistsScreen componentId={componentId} />);
@@ -30,5 +35,19 @@ describe('ArtistsScreen test', () => {
 
     expect(wrapper.find({ testId: 'Warning-notification' })).not.toHaveLength(1);
     expect(wrapper.find({ testId: 'Welcome-notification' })).toHaveLength(1);
+  });
+
+  test('New test', () => {
+    jest.spyOn(NetinfoModule, 'useNetInfo').mockImplementation(() => ({ isConnected: true }));
+    const wrapper = shallow(<ArtistsScreen componentId={componentId} />);
+    const search = wrapper.find('SearchBar');
+    const newValue = 'str';
+    console.dir(search.props().onSearch);
+    const omg = search.prop('onSearch');
+    search.simulate('change', [newValue]);
+    search.props().onSearch(newValue);
+    omg(newValue);
+
+    expect(search.props().searchValue).toBe(newValue);
   });
 });

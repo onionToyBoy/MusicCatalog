@@ -31,11 +31,7 @@ describe('SearchBar component', () => {
     );
     const root = component.root;
     const input = root.findByType('TextInput');
-    //const cross = root.findByTestId('custom');
 
-    //cross.props.onPress();
-
-    // expect(cross.mock.calls.length).toBe(1);
     expect(input.props.value).toBe('');
   });
 });
