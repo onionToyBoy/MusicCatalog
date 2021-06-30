@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ArtistsScreen test FlatList 1`] = `ShallowWrapper {}`;
+
+exports[`ArtistsScreen test On clearInput 1`] = `
+<view
+  style="flex:1;padding:5px;background-color:#1E1E1E"
+>
+  <view
+    style="flex-direction:row;min-height:40px;margin-vertical:10px;border-width:1px;border-color:#505050"
+  >
+    <textinput
+      maxlength="30"
+      placeholder="Enter text..."
+      placeholdertextcolor="#505050"
+      style="flex:1;color:#FFFFFF;padding-horizontal:15px;font-size:17px"
+      underlinecolorandroid="transparent"
+      value=""
+    />
+    <view
+      focusable="true"
+      style="padding-horizontal:12px;opacity:1"
+    >
+      <text
+        style="color:#1E1E1E"
+      >
+        ᳵ
+      </text>
+    </view>
+  </view>
+  <view
+    style="flex:1;justify-content:center;align-items:center"
+  >
+    <text
+      style="0:[object Object];1:[object Object]"
+    >
+      ♫
+    </text>
+    <text
+      style="0:[object Object];1:[object Object]"
+    >
+      Search your artist
+    </text>
+  </view>
+</view>
+`;
