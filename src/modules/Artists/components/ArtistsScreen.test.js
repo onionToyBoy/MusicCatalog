@@ -6,19 +6,6 @@ import * as NetinfoModule from '@react-native-community/netinfo';
 import * as SelectorsModule from '../selectors';
 import { Navigation } from 'react-native-navigation';
 
-jest.mock('@react-native-community/netinfo', () => ({
-  useNetInfo: jest.fn(() => ({ isConnected: true })),
-}));
-jest.mock('react-native-navigation', () => ({
-  Navigation: {
-    push: jest.fn((componentId, obj) => {}),
-  },
-}));
-jest.mock('react-redux', () => ({
-  useDispatch: () => jest.fn(),
-  useSelector: selector => selector(),
-}));
-
 describe('ArtistsScreen test', () => {
   const componentId = '123';
   const artists = [
@@ -26,13 +13,7 @@ describe('ArtistsScreen test', () => {
     { artistName: 'Cypres hill', artistId: 1449305168 },
     { artistName: 'Navel', artistId: 1530211376 },
   ];
-  const navigationObject = {
-    component: {
-      name: 'ArtistsAlbums',
-      options: { topBar: { title: { text: 'undefined albums' } } },
-      passProps: { artistId: undefined },
-    },
-  };
+
   beforeEach(() => {
     jest.spyOn(SelectorsModule, 'selectArtists').mockImplementation(() => [artists]);
     jest.spyOn(NetinfoModule, 'useNetInfo').mockImplementation(() => ({ isConnected: true }));
@@ -53,7 +34,7 @@ describe('ArtistsScreen test', () => {
     expect(wrapper.find({ testId: 'Welcome-notification' })).toHaveLength(1);
   });
 
-  test('New test', () => {
+  test('searchValue should be equal newValue after using the onSearch', () => {
     const wrapper = shallow(<ArtistsScreen componentId={componentId} />);
     const newValue = 'str';
 
@@ -62,7 +43,7 @@ describe('ArtistsScreen test', () => {
     expect(wrapper.find('SearchBar').prop('searchValue')).toBe(newValue);
   });
 
-  test('On clearInput', () => {
+  test('Clearing searchValue on clearInput', () => {
     const wrapper = shallow(<ArtistsScreen componentId={componentId} />);
     const newValue = 'str';
 
@@ -73,17 +54,49 @@ describe('ArtistsScreen test', () => {
     expect(wrapper.find('SearchBar').prop('searchValue')).toBe('');
   });
 
-  test('FlatList', () => {
+  test('Renders FlatList when searchValue is not empty & FlatList data should be correct', () => {
     jest.spyOn(SelectorsModule, 'selectArtists').mockImplementation(() => artists);
 
     const wrapper = shallow(<ArtistsScreen componentId={componentId} />);
-    const newValue = 'str';
-    wrapper.props().children[0].props.onSearch('sdsdsd');
-    wrapper.find('SearchBar').prop('onSearch')?.(newValue);
-    const flatList = wrapper.find('FlatList');
-    const artist = flatList.props().renderItem(flatList.props().data[0]);
-    artist.props.onOpenAlbum();
+    wrapper.find('SearchBar').prop('onSearch')?.('searchValue');
 
-    expect(Navigation.push).toHaveBeenCalledWith(componentId, navigationObject);
+    expect(wrapper.find('FlatList').prop('data')).toEqual(artists);
+  });
+
+  test('Should return correct key & Artist prop values', () => {
+    jest.spyOn(SelectorsModule, 'selectArtists').mockImplementation(() => artists);
+
+    const { artistName, artistId } = artists[0];
+
+    const wrapper = shallow(<ArtistsScreen componentId={componentId} />);
+    wrapper.find('SearchBar').prop('onSearch')?.('searchValue');
+    //const key = wrapper.find('FlatList').prop('keyExtractor')?.({ item: artists[0] });
+    const artist = wrapper.find('FlatList').prop('renderItem')?.({ item: artists[0] });
+
+    //expect(key).toEqual(artistId);
+    expect(artist.props.artistName).toEqual(artistName);
+    expect(artist.props.artistId).toEqual(artistId);
+  });
+
+  test('onOpenAlbum should calls Navigation', () => {
+    jest.spyOn(SelectorsModule, 'selectArtists').mockImplementation(() => artists);
+
+    const { artistName, artistId } = artists[0];
+
+    const navigationOptions = {
+      component: {
+        name: 'ArtistsAlbums',
+        options: { topBar: { title: { text: `${artistName} albums` } } },
+        passProps: { artistId },
+      },
+    };
+
+    const wrapper = shallow(<ArtistsScreen componentId={componentId} />);
+    wrapper.find('SearchBar').prop('onSearch')?.('searchValue');
+    const artist = wrapper.find('FlatList').prop('renderItem')?.({ item: artists[0] });
+    artist.props.onOpenAlbum(artistName, artistId);
+
+    expect(Navigation.push).toHaveBeenCalledWith(componentId, navigationOptions);
+    Navigation.push.mockClear();
   });
 });

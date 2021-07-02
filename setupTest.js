@@ -6,5 +6,15 @@ enableHooks(jest);
 
 configure({ adapter: new Adapter() });
 
-jest.mock('react-native-navigation', () => ({}));
-jest.mock('@react-native-community/netinfo', () => ({}));
+jest.mock('react-native-navigation', () => ({
+  Navigation: {
+    push: jest.fn(() => {}),
+  },
+}));
+jest.mock('@react-native-community/netinfo', () => ({
+  useNetInfo: jest.fn(() => ({ isConnected: true })),
+}));
+jest.mock('react-redux', () => ({
+  useDispatch: () => jest.fn(),
+  useSelector: selector => selector(),
+}));
