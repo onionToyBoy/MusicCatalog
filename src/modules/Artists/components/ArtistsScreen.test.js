@@ -70,10 +70,10 @@ describe('ArtistsScreen test', () => {
 
     const wrapper = shallow(<ArtistsScreen componentId={componentId} />);
     wrapper.find('SearchBar').prop('onSearch')?.('searchValue');
-    //const key = wrapper.find('FlatList').prop('keyExtractor')?.({ item: artists[0] });
+    const key = wrapper.find('FlatList').props().keyExtractor({ artistId });
     const artist = wrapper.find('FlatList').prop('renderItem')?.({ item: artists[0] });
 
-    //expect(key).toEqual(artistId);
+    expect(key).toEqual(artistId);
     expect(artist.props.artistName).toEqual(artistName);
     expect(artist.props.artistId).toEqual(artistId);
   });

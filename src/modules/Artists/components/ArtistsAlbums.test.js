@@ -9,8 +9,8 @@ import { routes } from '../../../constants/routes';
 describe('ArtistsAlbums test', () => {
   const props = { componentId: '1234', artistId: '4321' };
   const albums = [
-    { albumName: 'The fat of the land', albumId: 15 },
-    { albumName: 'The day is my enemy', albumId: 19 },
+    { albumName: 'The fat of the land', collectionId: 15 },
+    { albumName: 'The day is my enemy', collectionId: 19 },
   ];
 
   test('Renders FlatList with data correct', () => {
@@ -24,25 +24,27 @@ describe('ArtistsAlbums test', () => {
   test('Should return correct key & Album prop values', () => {
     jest.spyOn(SelectorsModule, 'selectAlbums').mockImplementation(() => () => albums);
 
-    const { albumName, albumId } = albums[0];
+    const { albumName, collectionId } = albums[0];
 
     const wrapper = shallow(<ArtistsAlbums {...props} />);
     const album = wrapper.find('FlatList').prop('renderItem')?.({ item: albums[0] });
+    const key = wrapper.find('FlatList').props().keyExtractor({ collectionId });
 
+    expect(key).toEqual(collectionId);
     expect(album.props.albumName).toEqual(albumName);
-    expect(album.props.albumId).toEqual(albumId);
+    expect(album.props.collectionId).toEqual(collectionId);
   });
 
   test('onOpenAlbum should calls Navigation', () => {
     jest.spyOn(SelectorsModule, 'selectAlbums').mockImplementation(() => () => albums);
 
-    const { albumName, albumId } = albums[0];
+    const { albumName, collectionId } = albums[0];
 
     const navigationOptions = {
       component: {
         name: routes.AlbumTracks,
         passProps: {
-          albumId,
+          albumId: collectionId,
         },
         options: {
           topBar: {
@@ -56,7 +58,7 @@ describe('ArtistsAlbums test', () => {
 
     const wrapper = shallow(<ArtistsAlbums {...props} />);
     const album = wrapper.find('FlatList').prop('renderItem')?.({ item: albums[0] });
-    album.props.onOpenTracks(albumName, albumId);
+    album.props.onOpenTracks(albumName, collectionId);
 
     expect(Navigation.push).toHaveBeenCalledWith(props.componentId, navigationOptions);
     Navigation.push.mockClear();

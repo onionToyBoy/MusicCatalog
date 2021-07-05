@@ -26,7 +26,9 @@ describe('ArtistsAlbums test', () => {
 
     const wrapper = shallow(<AlbumTracks albumId={albumId} />);
     const track = wrapper.find('FlatList').prop('renderItem')?.({ item: tracks[0] });
+    const key = wrapper.find('FlatList').props().keyExtractor({ trackId });
 
+    expect(key).toEqual(trackId);
     expect(track.props.trackName).toEqual(trackName);
     expect(track.props.trackId).toEqual(trackId);
   });
