@@ -40,7 +40,12 @@ export const ArtistsAlbums = ({ componentId, artistId }) => {
 
   return (
     <View style={styles.container}>
-      <FlatList data={albums} keyExtractor={item => item.collectionId} renderItem={renderAlbums} />
+      <FlatList
+        testID={'albumList'}
+        data={albums}
+        keyExtractor={item => item.collectionId}
+        renderItem={renderAlbums}
+      />
     </View>
   );
 };

@@ -4,8 +4,6 @@ import { shallow } from 'enzyme';
 import { Track } from './Track';
 import { timeConventer } from '../../../utils';
 
-jest.mock('../../../utils');
-
 describe('Track test', () => {
   const props = {
     trackName: 'Mascara',
@@ -14,14 +12,13 @@ describe('Track test', () => {
   };
 
   test('Props in Track component should be correct', () => {
-    const component = shallow(<Track {...props} />);
-    const number = component.find('Text').at(0).props().children;
-    const name = component.find('Text').at(1).props().children;
-    const timeMillis = component.find('Text').at(2).props().children;
+    const wrapper = shallow(<Track {...props} />);
+    const number = wrapper.find({ testID: 'number' }).prop('children');
+    const name = wrapper.find({ testID: 'name' }).prop('children');
+    const timeMillis = wrapper.find({ testID: 'timeMillis' }).prop('children');
 
     expect(number).toEqual(props.trackNumber);
     expect(name).toEqual(props.trackName);
     expect(timeMillis).toEqual(timeConventer(props.trackTimeMillis));
-    expect(timeConventer).toHaveBeenCalledWith(props.trackTimeMillis);
   });
 });

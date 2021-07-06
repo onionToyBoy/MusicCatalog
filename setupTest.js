@@ -11,9 +11,11 @@ jest.mock('react-native-navigation', () => ({
     push: jest.fn(() => {}),
   },
 }));
+
 jest.mock('@react-native-community/netinfo', () => ({
   useNetInfo: jest.fn(() => ({ isConnected: true })),
 }));
+
 jest.mock('react-redux', () => ({
   useDispatch: () => jest.fn(),
   useSelector: selector => selector(),

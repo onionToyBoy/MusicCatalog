@@ -12,13 +12,18 @@ describe('Artist test', () => {
   };
 
   test('Props in Artist component should be correct', () => {
-    const component = shallow(<Artist {...props} />);
-    const name = component.find('Text').at(0).props().children;
-    const genre = component.find('Text').at(1).props().children;
-    component.simulate('press');
+    const wrapper = shallow(<Artist {...props} />);
+    const name = wrapper.find({ testID: 'name' }).prop('children');
+    const genre = wrapper.find({ testID: 'genre' }).prop('children');
 
-    expect(props.onOpenAlbum).toHaveBeenCalledWith(props.artistName, props.artistId);
     expect(name).toEqual(props.artistName);
     expect(genre).toEqual(props.primaryGenreName);
+  });
+
+  test('Should call onOpenAlbum with correct params', () => {
+    const wrapper = shallow(<Artist {...props} />);
+    wrapper.simulate('press');
+
+    expect(props.onOpenAlbum).toHaveBeenCalledWith(props.artistName, props.artistId);
   });
 });

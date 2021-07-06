@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import * as NetinfoModule from '@react-native-community/netinfo';
+import { Navigation } from 'react-native-navigation';
 
 import { ArtistsScreen } from './ArtistsScreen';
-import * as NetinfoModule from '@react-native-community/netinfo';
 import * as SelectorsModule from '../selectors';
-import { Navigation } from 'react-native-navigation';
 
 describe('ArtistsScreen test', () => {
   const componentId = '123';
@@ -19,7 +19,7 @@ describe('ArtistsScreen test', () => {
     jest.spyOn(NetinfoModule, 'useNetInfo').mockImplementation(() => ({ isConnected: true }));
   });
 
-  test(' Renders warning notification when isConnected is false', () => {
+  test('Renders warning notification when isConnected is false', () => {
     jest.spyOn(NetinfoModule, 'useNetInfo').mockImplementation(() => ({ isConnected: false }));
     const wrapper = shallow(<ArtistsScreen componentId={componentId} />);
 
@@ -27,7 +27,7 @@ describe('ArtistsScreen test', () => {
     expect(wrapper.find({ testId: 'Welcome-notification' })).not.toHaveLength(1);
   });
 
-  test(' Renders welcome notification when isConnected is true', () => {
+  test('Renders welcome notification when isConnected is true', () => {
     const wrapper = shallow(<ArtistsScreen componentId={componentId} />);
 
     expect(wrapper.find({ testId: 'Warning-notification' })).not.toHaveLength(1);
@@ -43,7 +43,7 @@ describe('ArtistsScreen test', () => {
     expect(wrapper.find('SearchBar').prop('searchValue')).toBe(newValue);
   });
 
-  test('Clearing searchValue on clearInput', () => {
+  test('Clears searchValue on clearInput', () => {
     const wrapper = shallow(<ArtistsScreen componentId={componentId} />);
     const newValue = 'str';
 

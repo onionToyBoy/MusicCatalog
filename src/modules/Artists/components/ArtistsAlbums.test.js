@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { Navigation } from 'react-native-navigation';
 
 import { ArtistsAlbums } from './ArtistsAlbums';
 import * as SelectorsModule from '../selectors';
-import { Navigation } from 'react-native-navigation';
 import { routes } from '../../../constants/routes';
 
 describe('ArtistsAlbums test', () => {
@@ -13,22 +13,26 @@ describe('ArtistsAlbums test', () => {
     { albumName: 'The day is my enemy', collectionId: 19 },
   ];
 
-  test('Renders FlatList with data correct', () => {
-    jest.spyOn(SelectorsModule, 'selectAlbums').mockImplementation(() => () => albums);
+  afterEach(() => {
+    Navigation.push.mockClear();
+  });
 
+  beforeEach(() => {
+    jest.spyOn(SelectorsModule, 'selectAlbums').mockImplementation(() => () => albums);
+  });
+
+  test('Renders FlatList with data correct', () => {
     const wrapper = shallow(<ArtistsAlbums {...props} />);
 
-    expect(wrapper.find('FlatList').prop('data')).toEqual(albums);
+    expect(wrapper.find({ testID: 'albumList' }).prop('data')).toEqual(albums);
   });
 
   test('Should return correct key & Album prop values', () => {
-    jest.spyOn(SelectorsModule, 'selectAlbums').mockImplementation(() => () => albums);
-
     const { albumName, collectionId } = albums[0];
 
     const wrapper = shallow(<ArtistsAlbums {...props} />);
-    const album = wrapper.find('FlatList').prop('renderItem')?.({ item: albums[0] });
-    const key = wrapper.find('FlatList').props().keyExtractor({ collectionId });
+    const album = wrapper.find({ testID: 'albumList' }).prop('renderItem')?.({ item: albums[0] });
+    const key = wrapper.find({ testID: 'albumList' }).prop('keyExtractor')?.({ collectionId });
 
     expect(key).toEqual(collectionId);
     expect(album.props.albumName).toEqual(albumName);
@@ -36,8 +40,6 @@ describe('ArtistsAlbums test', () => {
   });
 
   test('onOpenAlbum should calls Navigation', () => {
-    jest.spyOn(SelectorsModule, 'selectAlbums').mockImplementation(() => () => albums);
-
     const { albumName, collectionId } = albums[0];
 
     const navigationOptions = {
@@ -57,10 +59,9 @@ describe('ArtistsAlbums test', () => {
     };
 
     const wrapper = shallow(<ArtistsAlbums {...props} />);
-    const album = wrapper.find('FlatList').prop('renderItem')?.({ item: albums[0] });
+    const album = wrapper.find({ testID: 'albumList' }).prop('renderItem')?.({ item: albums[0] });
     album.props.onOpenTracks(albumName, collectionId);
 
     expect(Navigation.push).toHaveBeenCalledWith(props.componentId, navigationOptions);
-    Navigation.push.mockClear();
   });
 });

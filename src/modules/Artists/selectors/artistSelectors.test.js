@@ -29,20 +29,20 @@ describe('Artists selector', () => {
     },
   };
 
-  test('selectArtists selector should be returned safety data', () => {
+  test('selectArtists selector should  return artists', () => {
     const result = selectArtists(state);
 
     expect(result).toBe(state.artistsReducer.artists);
   });
 
-  test('selectAlbums selector should be returned safety and valid data', () => {
+  test('selectAlbums selector should return albums', () => {
     const artistId = 2;
     const result = selectAlbums(artistId)(state);
 
     expect(result).toBe(state.artistsReducer.albums[artistId]);
   });
 
-  test('selectTracks selector should be returned safety and valid data', () => {
+  test('selectTracks selector should return tracks', () => {
     const albumId = 10;
     const result = selectTracks(albumId)(state);
 

@@ -1,6 +1,5 @@
-import 'react-native';
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { shallow } from 'enzyme';
 
 import { SearchBar } from './SearchBar';
 
@@ -10,28 +9,25 @@ describe('SearchBar component', () => {
   const clearInput = jest.fn(() => onSearch(''));
   const search = 'deftones';
 
-  test('onSearch should be changed value of TextInput', () => {
-    onSearch(search);
-
-    const component = renderer.create(
+  test('onSearch should change value of TextInput', () => {
+    const wrapper = shallow(
       <SearchBar onSearch={onSearch} clearInput={clearInput} searchValue={searchValue} />,
     );
-    const root = component.root;
-    const input = root.findByType('TextInput');
+    const input = wrapper.find({ testID: 'input' });
+    input.simulate('changeText', search);
 
-    expect(input.props.value).toBe(search);
+    expect(searchValue).toBe(search);
   });
 
-  test('clearInput should be removed value of TextInput', () => {
-    onSearch(search);
-    clearInput();
-
-    const component = renderer.create(
+  test('clearInput should remove value of TextInput', () => {
+    const wrapper = shallow(
       <SearchBar onSearch={onSearch} clearInput={clearInput} searchValue={searchValue} />,
     );
-    const root = component.root;
-    const input = root.findByType('TextInput');
+    const input = wrapper.find({ testID: 'input' });
+    const crossButton = wrapper.find({ testID: 'crossButton' });
+    input.simulate('changeText', search);
+    crossButton.simulate('press');
 
-    expect(input.props.value).toBe('');
+    expect(searchValue).toBe('');
   });
 });

@@ -18,8 +18,9 @@ export const SearchBar = ({ onSearch, clearInput, searchValue }) => {
         placeholder='Enter text...'
         placeholderTextColor={colors.BRIGHT_GRAY}
         maxLength={30}
+        testID={'input'}
       />
-      <TouchableOpacity testid='custom' style={styles.crossContainer} onPress={clearInput}>
+      <TouchableOpacity testID={'crossButton'} style={styles.crossContainer} onPress={clearInput}>
         <Text style={iconStyle}>{symbols.CROSS}</Text>
       </TouchableOpacity>
     </View>
