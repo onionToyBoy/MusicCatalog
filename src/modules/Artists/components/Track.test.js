@@ -5,15 +5,13 @@ import { Track } from './Track';
 import { timeConventer } from '../../../utils';
 
 describe('Track test', () => {
-  const props = {
-    trackName: 'Mascara',
-    trackTimeMillis: 32323232,
-    trackNumber: 4,
-  };
-  const { trackName, trackTimeMillis, trackNumber } = props;
-
   test('Props in Track component should be correct', () => {
-    const wrapper = shallow(<Track {...props} />);
+    const trackName = 'Mascara';
+    const trackTimeMillis = 32323232;
+    const trackNumber = 4;
+    const wrapper = shallow(
+      <Track trackName={trackName} trackTimeMillis={trackTimeMillis} trackNumber={trackNumber} />,
+    );
     const number = wrapper.find({ testID: 'number' }).prop('children');
     const name = wrapper.find({ testID: 'name' }).prop('children');
     const timeMillis = wrapper.find({ testID: 'timeMillis' }).prop('children');

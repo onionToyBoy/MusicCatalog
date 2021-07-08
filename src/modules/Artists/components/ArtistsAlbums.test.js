@@ -53,7 +53,6 @@ describe('ArtistsAlbums test', () => {
             title: {
               text: albumName,
             },
-            rightButtons: [{ component: { name: routes.FavoriteButton } }],
           },
         },
       },

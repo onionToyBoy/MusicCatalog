@@ -5,19 +5,21 @@ import { Album } from './Album';
 import { checkPrice } from '../../../utils';
 
 describe('Album test', () => {
-  const props = {
-    artistName: 'Metallica',
-    collectionName: 'Kill em all',
-    artworkUrl60: 'iTunse.com/image',
-    collectionPrice: 9.99,
-    onOpenTracks: jest.fn(),
-    collectionId: '2323',
-  };
-  const { artistName, collectionName, artworkUrl60, collectionPrice, onOpenTracks, collectionId } =
-    props;
+  const collectionName = 'Kill em all';
 
   test('Props in Album component should be correct', () => {
-    const wrapper = shallow(<Album {...props} />);
+    const artistName = 'Metallica';
+    const artworkUrl60 = 'iTunse.com/image';
+    const collectionPrice = 9.99;
+
+    const wrapper = shallow(
+      <Album
+        artistName={artistName}
+        collectionName={collectionName}
+        artworkUrl60={artworkUrl60}
+        collectionPrice={collectionPrice}
+      />,
+    );
     const artwork = wrapper.find({ testID: 'artwork' }).prop('source');
     const album = wrapper.find({ testID: 'collectionName' }).prop('children');
     const artist = wrapper.find({ testID: 'artistName' }).prop('children');
@@ -30,7 +32,16 @@ describe('Album test', () => {
   });
 
   test('Should call onOpenTracks with correct params', () => {
-    const wrapper = shallow(<Album {...props} />);
+    const collectionId = '2323';
+
+    const onOpenTracks = jest.fn();
+    const wrapper = shallow(
+      <Album
+        collectionName={collectionName}
+        collectionId={collectionId}
+        onOpenTracks={onOpenTracks}
+      />,
+    );
     wrapper.simulate('press');
 
     expect(onOpenTracks).toHaveBeenCalledWith(collectionName, collectionId);

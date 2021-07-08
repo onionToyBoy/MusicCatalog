@@ -7,13 +7,11 @@ import { AlbumsScreen } from '../modules/Albums/AlbumsScreen';
 import { ReduxProvider } from '../store/ReduxProvider';
 import { ArtistsAlbums } from '../modules/Artists/components/ArtistsAlbums';
 import { AlbumTracks } from '../modules/Artists/components/AlbumTracks';
-import { FavoriteButton } from './FavoriteButton';
 
 Navigation.registerComponent(routes.Artists, () => ReduxProvider(ArtistsScreen));
 Navigation.registerComponent(routes.Albums, () => ReduxProvider(AlbumsScreen));
 Navigation.registerComponent(routes.ArtistsAlbums, () => ReduxProvider(ArtistsAlbums));
 Navigation.registerComponent(routes.AlbumTracks, () => ReduxProvider(AlbumTracks));
-Navigation.registerComponent(routes.FavoriteButton, () => FavoriteButton);
 
 Navigation.setDefaultOptions({
   statusBar: {
@@ -35,6 +33,7 @@ Navigation.setDefaultOptions({
     },
   },
 });
+
 export const RootNavigation = () => {
   return async () => {
     Navigation.setRoot({
