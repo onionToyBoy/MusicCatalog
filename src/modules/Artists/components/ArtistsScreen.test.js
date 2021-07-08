@@ -15,7 +15,7 @@ describe('ArtistsScreen test', () => {
   ];
 
   beforeEach(() => {
-    jest.spyOn(SelectorsModule, 'selectArtists').mockImplementation(() => [artists]);
+    jest.spyOn(SelectorsModule, 'selectArtists').mockImplementation(() => []);
     jest.spyOn(NetinfoModule, 'useNetInfo').mockImplementation(() => ({ isConnected: true }));
   });
 

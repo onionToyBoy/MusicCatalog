@@ -8,11 +8,11 @@ describe('Notification selector', () => {
     },
   };
 
-  test('selectIsLoading selector should be returned value of isLoading', () => {
+  test('selectIsLoading selector should return value of isLoading', () => {
     expect(selectIsLoading(state)).toBe(state.notificationReducer.isLoading);
   });
 
-  test('selectIsError selector should be returned value of IsError', () => {
+  test('selectIsError selector should return value of IsError', () => {
     expect(selectIsError(state)).toBe(state.notificationReducer.isError);
   });
 });

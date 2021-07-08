@@ -14,7 +14,7 @@ describe('Notification reducers', () => {
     expect(newState.isError).toBe(true);
   });
 
-  test('Default section should be returned initial state', () => {
+  test('Default section should return initial state', () => {
     const newState = notificationReducer(INITIAL_STATE, {});
 
     expect(newState).toBe(INITIAL_STATE);

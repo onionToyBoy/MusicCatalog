@@ -9,25 +9,23 @@ describe('SearchBar component', () => {
   const clearInput = jest.fn(() => onSearch(''));
   const search = 'deftones';
 
-  test('onSearch should change value of TextInput', () => {
+  test('changetext should call onSearch function', () => {
     const wrapper = shallow(
       <SearchBar onSearch={onSearch} clearInput={clearInput} searchValue={searchValue} />,
     );
     const input = wrapper.find({ testID: 'input' });
     input.simulate('changeText', search);
 
-    expect(searchValue).toBe(search);
+    expect(onSearch).toHaveBeenCalledWith(search);
   });
 
-  test('clearInput should remove value of TextInput', () => {
+  test('on Button press should call clearInput function', () => {
     const wrapper = shallow(
       <SearchBar onSearch={onSearch} clearInput={clearInput} searchValue={searchValue} />,
     );
-    const input = wrapper.find({ testID: 'input' });
     const crossButton = wrapper.find({ testID: 'crossButton' });
-    input.simulate('changeText', search);
     crossButton.simulate('press');
 
-    expect(searchValue).toBe('');
+    expect(clearInput).toHaveBeenCalled();
   });
 });

@@ -1,4 +1,4 @@
-import { getAlbums, getTracks, searchArtist } from '.';
+import { getAlbums, getTracks, searchArtist } from './index';
 import { getSpecificAlbums } from '../../../requests/getSpecificAlbums';
 import { getSpecificTracks } from '../../../requests/getSpecificTracks';
 import { searchArtists } from '../../../requests/searchArtists';

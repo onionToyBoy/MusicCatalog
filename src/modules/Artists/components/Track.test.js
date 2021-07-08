@@ -10,6 +10,7 @@ describe('Track test', () => {
     trackTimeMillis: 32323232,
     trackNumber: 4,
   };
+  const { trackName, trackTimeMillis, trackNumber } = props;
 
   test('Props in Track component should be correct', () => {
     const wrapper = shallow(<Track {...props} />);
@@ -17,8 +18,8 @@ describe('Track test', () => {
     const name = wrapper.find({ testID: 'name' }).prop('children');
     const timeMillis = wrapper.find({ testID: 'timeMillis' }).prop('children');
 
-    expect(number).toEqual(props.trackNumber);
-    expect(name).toEqual(props.trackName);
-    expect(timeMillis).toEqual(timeConventer(props.trackTimeMillis));
+    expect(number).toEqual(trackNumber);
+    expect(name).toEqual(trackName);
+    expect(timeMillis).toEqual(timeConventer(trackTimeMillis));
   });
 });

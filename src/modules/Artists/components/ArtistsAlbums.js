@@ -30,6 +30,13 @@ export const ArtistsAlbums = ({ componentId, artistId }) => {
             title: {
               text: albumName,
             },
+            rightButtons: [
+              {
+                component: {
+                  name: routes.FavoriteButton,
+                },
+              },
+            ],
           },
         },
       },

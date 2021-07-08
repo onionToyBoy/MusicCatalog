@@ -18,13 +18,13 @@ describe('Artists reducer', () => {
     { trackName: 'Holy stain', trackId: 41 },
   ];
 
-  test('artistsReducer should be put safety data in newState (artists)', () => {
+  test('artistsReducer should put safety data in newState (artists)', () => {
     const newState = artistsReducer(INITIAL_STATE, setArtists(artists));
 
     expect(newState.artists).toBe(artists);
   });
 
-  test('artistsReducer should not changed previous data in state (albums)', () => {
+  test('artistsReducer should not change previous data in state (albums)', () => {
     const artistId = 0;
     const defaultState = {
       ...INITIAL_STATE,
@@ -41,7 +41,7 @@ describe('Artists reducer', () => {
     expect(newState).toEqual(expectedState);
   });
 
-  test('artistsReducer should not changed previous data in state (tracks)', () => {
+  test('artistsReducer should not change previous data in state (tracks)', () => {
     const albumId = 11;
     const defaultState = {
       ...INITIAL_STATE,
@@ -58,7 +58,7 @@ describe('Artists reducer', () => {
     expect(newState).toEqual(expectedState);
   });
 
-  test('Default section should be returned initial state', () => {
+  test('Default section should return initial state', () => {
     const newState = artistsReducer(INITIAL_STATE, {});
 
     expect(newState).toBe(INITIAL_STATE);
