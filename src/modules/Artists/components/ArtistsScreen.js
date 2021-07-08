@@ -12,6 +12,7 @@ import { searchArtist } from '../thunks';
 import { routes } from '../../../constants/routes';
 import { SearchBar } from '../../../components/SearchBar';
 import { GeneralNotification } from '../../../components/GeneralNotification';
+import { Header } from '../../../components/Header';
 
 export const ArtistsScreen = ({ componentId }) => {
   const [searchValue, setSearchValue] = useState('');
@@ -32,13 +33,7 @@ export const ArtistsScreen = ({ componentId }) => {
         name: routes.ArtistsAlbums,
         passProps: {
           artistId: id,
-        },
-        options: {
-          topBar: {
-            title: {
-              text: `${name} albums`,
-            },
-          },
+          artistName: name,
         },
       },
     });
@@ -50,33 +45,36 @@ export const ArtistsScreen = ({ componentId }) => {
 
   return (
     <View style={styles.container}>
-      <SearchBar onSearch={setSearchValue} clearInput={clearInput} searchValue={searchValue} />
-      {!isConnected && (
-        <GeneralNotification
-          testId={'Warning-notification'}
-          symbol={symbols.WARNING}
-          text={'NO INTERNET'}
-          notificationColor={colors.RED}
-        />
-      )}
-      {isConnected &&
-        (searchValue ? (
-          <FlatList
-            contentContainerStyle={{ flexGrow: 1 }}
-            data={artists}
-            keyExtractor={item => item.artistId}
-            renderItem={renderArtists}
-            ListEmptyComponent={
-              <GeneralNotification symbol={symbols.BASS_CLEF} text={'NOT FOUND'} />
-            }
-          />
-        ) : (
+      <Header title={'Artists'} />
+      <View style={styles.content}>
+        <SearchBar onSearch={setSearchValue} clearInput={clearInput} searchValue={searchValue} />
+        {!isConnected && (
           <GeneralNotification
-            testId={'Welcome-notification'}
-            symbol={symbols.NOTE}
-            text={'Search your artist'}
+            testId={'Warning-notification'}
+            symbol={symbols.WARNING}
+            text={'NO INTERNET'}
+            notificationColor={colors.RED}
           />
-        ))}
+        )}
+        {isConnected &&
+          (searchValue ? (
+            <FlatList
+              contentContainerStyle={{ flexGrow: 1 }}
+              data={artists}
+              keyExtractor={item => item.artistId}
+              renderItem={renderArtists}
+              ListEmptyComponent={
+                <GeneralNotification symbol={symbols.BASS_CLEF} text={'NOT FOUND'} />
+              }
+            />
+          ) : (
+            <GeneralNotification
+              testId={'Welcome-notification'}
+              symbol={symbols.NOTE}
+              text={'Search your artist'}
+            />
+          ))}
+      </View>
     </View>
   );
 };
@@ -84,7 +82,10 @@ export const ArtistsScreen = ({ componentId }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 5,
+  },
+  content: {
+    flex: 1,
     backgroundColor: colors.DARK_GRAY,
+    padding: 5,
   },
 });

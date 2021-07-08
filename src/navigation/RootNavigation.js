@@ -18,19 +18,11 @@ Navigation.setDefaultOptions({
     backgroundColor: colors.PURPLE,
   },
   topBar: {
-    title: {
-      color: colors.WHITE,
-    },
-    backButton: {
-      color: colors.WHITE,
-    },
-    background: {
-      color: colors.PURPLE,
-    },
-    bottomTab: {
-      fontSize: 16,
-      selectedFontSize: 14,
-    },
+    height: 0,
+  },
+  bottomTab: {
+    fontSize: 14,
+    selectedFontSize: 16,
   },
 });
 
@@ -47,11 +39,6 @@ export const RootNavigation = () => {
                     component: {
                       name: routes.Artists,
                       options: {
-                        topBar: {
-                          title: {
-                            text: 'Artists',
-                          },
-                        },
                         bottomTab: {
                           text: 'Artists',
                         },
@@ -68,13 +55,8 @@ export const RootNavigation = () => {
                     component: {
                       name: routes.Albums,
                       options: {
-                        topBar: {
-                          title: {
-                            text: 'Albums',
-                          },
-                        },
                         bottomTab: {
-                          text: 'Albums',
+                          text: 'Favorites',
                         },
                       },
                     },
