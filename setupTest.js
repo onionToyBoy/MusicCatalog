@@ -1,4 +1,4 @@
-/* eslint-disable max-lines:["error", "'jest' is not defined"] */
+/* eslint-disable max-lines:["error", {'jest' is not defined}] */
 
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
