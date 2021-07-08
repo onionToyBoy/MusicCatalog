@@ -3,4 +3,5 @@ export const routes = {
   Albums: 'Albums',
   ArtistsAlbums: 'ArtistsAlbums',
   AlbumTracks: 'AlbumTracks',
+  FavoriteButton: 'FavoriteButton',
 };

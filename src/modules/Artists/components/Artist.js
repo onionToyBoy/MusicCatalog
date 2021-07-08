@@ -10,8 +10,12 @@ export const Artist = ({ artistName, primaryGenreName, onOpenAlbum, artistId }) 
   return (
     <TouchableOpacity style={styles.container} onPress={onPressArtist}>
       <View style={styles.leftContainer}>
-        <Text style={styles.name}>{artistName}</Text>
-        <Text style={styles.gerne}>{primaryGenreName}</Text>
+        <Text testID={'name'} style={styles.name}>
+          {artistName}
+        </Text>
+        <Text testID={'genre'} style={styles.genre}>
+          {primaryGenreName}
+        </Text>
       </View>
       <View style={styles.rightContainer}>
         <Text style={styles.bracket}>{symbols.RIGHT_ANGULAR_BRACKET}</Text>
@@ -33,7 +37,7 @@ const styles = StyleSheet.create({
     color: colors.WHITE,
     fontSize: 20,
   },
-  gerne: {
+  genre: {
     color: colors.GOLD,
     fontSize: 15,
   },

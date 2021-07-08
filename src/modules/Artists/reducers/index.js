@@ -1,6 +1,6 @@
 import { SET_ARTISTS, SET_ALBUMS, SET_TRACKS } from '../../../constants/actionsTypes';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   artists: [],
   albums: {},
   tracks: {},

@@ -6,8 +6,12 @@ import { colors } from '../constants/colors';
 export const GeneralNotification = ({ symbol, text, notificationColor = colors.BRIGHT_GRAY }) => {
   return (
     <View style={styles.container}>
-      <Text style={[styles.symbol, { color: notificationColor }]}>{symbol}</Text>
-      <Text style={[styles.text, { color: notificationColor }]}>{text}</Text>
+      <Text testID={'symbol'} style={[styles.symbol, { color: notificationColor }]}>
+        {symbol}
+      </Text>
+      <Text testID={'text'} style={[styles.text, { color: notificationColor }]}>
+        {text}
+      </Text>
     </View>
   );
 };

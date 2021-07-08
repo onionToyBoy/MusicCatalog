@@ -20,14 +20,20 @@ export const Album = ({
   return (
     <TouchableOpacity style={styles.container} onPress={onPressAlbum}>
       <View style={styles.leftContainer}>
-        <Image style={styles.image} source={{ uri: artworkUrl60 }} />
+        <Image testID={'artwork'} style={styles.image} source={{ uri: artworkUrl60 }} />
         <View>
-          <Text style={styles.title}>{collectionName}</Text>
-          <Text style={styles.subtitle}>{artistName}</Text>
+          <Text testID={'collectionName'} style={styles.title}>
+            {collectionName}
+          </Text>
+          <Text testID={'artistName'} style={styles.subtitle}>
+            {artistName}
+          </Text>
         </View>
       </View>
       <View style={styles.rightContainer}>
-        <Text style={styles.price}>{checkedPrice}</Text>
+        <Text testID={'collectionPrice'} style={styles.price}>
+          {checkedPrice}
+        </Text>
         <Text style={styles.bracket}>{symbols.RIGHT_ANGULAR_BRACKET}</Text>
       </View>
     </TouchableOpacity>

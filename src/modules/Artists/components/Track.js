@@ -10,11 +10,17 @@ export const Track = ({ trackName, trackNumber, trackTimeMillis }) => {
   return (
     <TouchableOpacity style={styles.container}>
       <View style={styles.leftContainer}>
-        <Text style={styles.numbers}>{trackNumber}</Text>
-        <Text style={styles.name}>{trackName}</Text>
+        <Text testID={'number'} style={styles.numbers}>
+          {trackNumber}
+        </Text>
+        <Text testID={'name'} style={styles.name}>
+          {trackName}
+        </Text>
       </View>
       <View style={styles.rightContainer}>
-        <Text style={styles.numbers}>{convertedTime}</Text>
+        <Text testID={'timeMillis'} style={styles.numbers}>
+          {convertedTime}
+        </Text>
       </View>
     </TouchableOpacity>
   );

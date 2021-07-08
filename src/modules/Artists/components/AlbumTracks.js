@@ -20,7 +20,12 @@ export const AlbumTracks = ({ albumId }) => {
 
   return (
     <View style={styles.container}>
-      <FlatList data={tracks} keyExtractor={item => item.trackId} renderItem={renderTracks} />
+      <FlatList
+        testID={'trackList'}
+        data={tracks}
+        keyExtractor={item => item.trackId}
+        renderItem={renderTracks}
+      />
     </View>
   );
 };

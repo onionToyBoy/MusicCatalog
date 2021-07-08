@@ -5,6 +5,7 @@ export const colors = {
   WHITE: '#FFFFFF',
   GOLD: '#CCA700',
   PURPLE: '#573D59',
+  DARK_PURPLE: '#2F1A3A',
   RED: '#8B0000',
   OPACITY_WHITE: '#FFF1',
 };
