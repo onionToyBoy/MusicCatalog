@@ -1,4 +1,4 @@
-/* eslint-disable max-lines:["error", 1]  */
+/* eslint-disable max-lines:["error", 'no-undef']  */
 
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
