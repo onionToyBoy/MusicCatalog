@@ -9,11 +9,29 @@ import { getTracks } from '../thunks';
 import { Track } from './Track';
 import { Header } from '../../../components/Header';
 import { titleLimiter } from '../../../utils';
+import { setFavoriteAlbum, removeFavoriteAlbum } from '../../Favorites/actions';
+import { selectFavorites } from '../../Favorites/selectors';
 
-export const AlbumTracks = ({ componentId, albumId, collectionName }) => {
+export const AlbumTracks = ({
+  componentId,
+  albumId,
+  collectionName,
+  collectionPrice,
+  artworkUrl60,
+  artistName,
+}) => {
   const dispatch = useDispatch();
 
   const tracks = useSelector(selectTracks(albumId));
+  const favorites = useSelector(selectFavorites);
+
+  const albumInfo = {
+    collectionId: albumId,
+    collectionName,
+    collectionPrice,
+    artworkUrl60,
+    artistName,
+  };
 
   useEffect(() => {
     dispatch(getTracks(albumId));
@@ -26,7 +44,11 @@ export const AlbumTracks = ({ componentId, albumId, collectionName }) => {
   };
 
   const onPressStar = () => {
-    Navigation.pop(componentId);
+    if (favorites.hasOwnProperty(albumId)) {
+      dispatch(removeFavoriteAlbum(albumId));
+    } else {
+      dispatch(setFavoriteAlbum(albumId, tracks, albumInfo));
+    }
   };
 
   return (
@@ -35,6 +57,7 @@ export const AlbumTracks = ({ componentId, albumId, collectionName }) => {
         title={titleLimiter(collectionName)}
         onPressBack={onPressBack}
         onPressStar={onPressStar}
+        isFavorite={favorites.hasOwnProperty(albumId)}
       />
       <FlatList
         testID={'trackList'}

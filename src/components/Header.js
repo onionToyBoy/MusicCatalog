@@ -4,7 +4,11 @@ import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { colors } from '../constants/colors';
 import { symbols } from '../constants/symbols';
 
-export const Header = ({ title, onPressBack, onPressStar }) => {
+export const Header = ({ title, onPressBack, onPressStar, isFavorite }) => {
+  const starStyle = isFavorite
+    ? { fontSize: 40, color: colors.GOLD }
+    : { fontSize: 40, color: colors.DARK_PURPLE };
+
   return (
     <View style={styles.container}>
       <View>
@@ -18,7 +22,7 @@ export const Header = ({ title, onPressBack, onPressStar }) => {
       <View>
         {onPressStar && (
           <TouchableOpacity onPress={onPressStar}>
-            <Text style={styles.star}>{symbols.STAR}</Text>
+            <Text style={starStyle}>{symbols.STAR}</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -40,7 +44,7 @@ const styles = StyleSheet.create({
     color: colors.WHITE,
   },
   backButton: {
-    fontSize: 25,
+    fontSize: 30,
     color: colors.WHITE,
   },
   star: {
