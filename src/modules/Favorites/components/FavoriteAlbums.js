@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FlatList, View, StyleSheet } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 
 import { colors } from '../../../constants/colors';
@@ -10,8 +10,6 @@ import { Header } from '../../../components/Header';
 import { Album } from '../../Albums/components/Album';
 
 export const FavoriteAlbums = ({ componentId }) => {
-  const dispatch = useDispatch();
-
   const favorites = useSelector(selectFavorites);
 
   const onOpenTracks = (albumName, id, collectionPrice, artworkUrl60) => {
