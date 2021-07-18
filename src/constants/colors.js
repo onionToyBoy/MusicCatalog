@@ -9,4 +9,5 @@ export const colors = {
   RED: '#8B0000',
   OPACITY_WHITE: '#FFF1',
   OPACITY_BLACK: '#000200DE',
+  OPACITY_GRAY: '#00020093',
 };

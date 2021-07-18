@@ -1,39 +1,59 @@
 import React from 'react';
-import { View, StyleSheet, Animated, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Animated, Text, TouchableOpacity, Modal } from 'react-native';
 
 import { colors } from '../../../constants/colors';
 
-export const FavoritesAlert = ({ animation, fadeOut, action, addOrRemoveTrack }) => {
+export const FavoritesAlert = ({
+  animation,
+  fadeOut,
+  action,
+  addOrRemoveTrack,
+  selectedTrackId,
+}) => {
   const actionWord = addOrRemoveTrack() ? 'Remove' : 'Add';
 
   const onAction = () => action(addOrRemoveTrack());
 
   return (
-    <Animated.View
-      style={[
-        styles.fadingContainer,
-        {
-          opacity: animation,
-          zIndex: animation,
-        },
-      ]}
+    <Modal
+      animationType='slide'
+      transparent={true}
+      visible={!!selectedTrackId}
+      onRequestClose={() => {
+        fadeOut();
+      }}
     >
-      <View>
-        <Text style={styles.text}>Do you want to {actionWord} this track in favorites?</Text>
+      <View style={styles.modalContainer}>
+        <Animated.View
+          style={[
+            styles.fadingContainer,
+            {
+              opacity: animation,
+            },
+          ]}
+        >
+          <View>
+            <Text style={styles.text}>Do you want to {actionWord} this track in favorites?</Text>
+          </View>
+          <View style={styles.buttonsContainer}>
+            <TouchableOpacity style={styles.button} onPress={onAction}>
+              <Text style={styles.text}>{actionWord}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={fadeOut}>
+              <Text style={styles.text}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </Animated.View>
       </View>
-      <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.button} onPress={onAction}>
-          <Text style={styles.text}>{actionWord}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={fadeOut}>
-          <Text style={styles.text}>Cancel</Text>
-        </TouchableOpacity>
-      </View>
-    </Animated.View>
+    </Modal>
   );
 };
 
 const styles = StyleSheet.create({
+  modalContainer: {
+    flex: 1,
+    backgroundColor: colors.OPACITY_GRAY,
+  },
   fadingContainer: {
     padding: 20,
     backgroundColor: colors.OPACITY_BLACK,

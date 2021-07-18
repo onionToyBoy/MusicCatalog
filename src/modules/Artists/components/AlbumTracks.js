@@ -42,7 +42,7 @@ export const AlbumTracks = ({
 
   useEffect(() => {
     dispatch(getTracks(albumId));
-  }, [dispatch, albumId]);
+  }, [dispatch, albumId, animation]);
 
   const animation = useRef(new Animated.Value(0)).current;
 
@@ -111,6 +111,8 @@ export const AlbumTracks = ({
         fadeOut={fadeOut}
         action={action}
         addOrRemoveTrack={addOrRemoveTrack}
+        selectedTrackId={selectedTrackId}
+        setSelectedTrackId={setSelectedTrackId}
       />
       <FlatList
         testID={'trackList'}
