@@ -26,14 +26,10 @@ export const favoriteAlbumsReducer = (state = INITIAL_STATE, action) => {
       };
     }
     case REMOVE_FAVORITE_ALBUM: {
-      const newFavorites = Object.entries(state.favorites).reduce(
-        (acc, [key, value]) =>
-          key !== action.payload.albumId.toString() ? { ...acc, [key]: value } : acc,
-        {},
-      );
+      const { [action.payload.albumId]: album, ...albums } = state.favorites;
       return {
         ...state,
-        favorites: newFavorites,
+        favorites: albums,
       };
     }
     case SET_FAVORITE_TRACK: {
@@ -59,23 +55,21 @@ export const favoriteAlbumsReducer = (state = INITIAL_STATE, action) => {
       };
     }
     case REMOVE_FAVORITE_TRACK: {
-      const removeTrack = () => {
-        const newTracks = state.favorites[action.payload.albumId].tracks.filter(
-          track => track.trackId !== action.payload.trackId,
-        );
-        return newTracks;
-      };
+      const { albumId, trackId } = action.payload;
 
+      const newTracks = state.favorites[albumId].tracks.filter(track => track.trackId !== trackId);
+      const { [albumId]: album, ...albums } = state.favorites;
       const newFavorites = {
         ...state.favorites,
-        [action.payload.albumId]: {
-          albums: state.favorites[action.payload.albumId].albums,
-          tracks: removeTrack(),
+        [albumId]: {
+          ...album,
+          tracks: newTracks,
         },
       };
+
       return {
         ...state,
-        favorites: newFavorites,
+        favorites: newTracks.length ? newFavorites : albums,
       };
     }
 

@@ -6,16 +6,3 @@ export const timeConventer = millis => {
 
   return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
 };
-
-export const titleLimiter = title => {
-  if (title.length <= 17) {
-    return title;
-  } else {
-    for (let i = 17; i < title.length; i++) {
-      if (title[i] === ' ') {
-        return `${title.slice(0, i)}...`;
-      }
-    }
-  }
-  return `${title.slice(0, 24)}...`;
-};

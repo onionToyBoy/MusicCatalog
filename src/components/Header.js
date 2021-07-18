@@ -18,7 +18,9 @@ export const Header = ({ title, onPressBack, onPressStar, isFavorite }) => {
           </TouchableOpacity>
         )}
       </View>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title} numberOfLines={1} ellipsizeMode={'tail'}>
+        {title}
+      </Text>
       <View>
         {onPressStar && (
           <TouchableOpacity onPress={onPressStar}>
@@ -42,6 +44,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     color: colors.WHITE,
+    width: '80%',
   },
   backButton: {
     fontSize: 30,

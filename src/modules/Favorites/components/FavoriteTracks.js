@@ -1,16 +1,18 @@
 import React from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 
 import { colors } from '../../../constants/colors';
 import { Track } from '../../Artists/components/Track';
 import { Header } from '../../../components/Header';
-import { titleLimiter } from '../../../utils';
-import { selectFavorites } from '../../Favorites/selectors';
+import { selectFavoriteAlbums } from '../../Favorites/selectors';
+import { removeFavoriteAlbum } from '../actions';
 
 export const FavoriteTracks = ({ componentId, albumId, collectionName }) => {
-  const favorites = useSelector(selectFavorites);
+  const favoriteAlbum = useSelector(selectFavoriteAlbums(albumId));
+
+  const dispatch = useDispatch();
 
   const renderTracks = ({ item }) => <Track {...item} />;
 
@@ -19,15 +21,21 @@ export const FavoriteTracks = ({ componentId, albumId, collectionName }) => {
   };
 
   const getFavoriteTracks = () => {
-    return favorites[albumId].tracks;
+    return favoriteAlbum && favoriteAlbum.tracks;
+  };
+
+  const onPressStar = () => {
+    dispatch(removeFavoriteAlbum(albumId));
+    Navigation.pop(componentId);
   };
 
   return (
     <View style={styles.container}>
       <Header
-        title={titleLimiter(collectionName)}
+        title={collectionName}
         onPressBack={onPressBack}
-        isFavorite={favorites.hasOwnProperty(albumId)}
+        isFavorite={favoriteAlbum}
+        onPressStar={onPressStar}
       />
       <FlatList
         testID={'trackList'}

@@ -9,7 +9,6 @@ import { getAlbums } from '../thunks';
 import { Album } from '../../Albums/components/Album';
 import { routes } from '../../../constants/routes';
 import { Header } from '../../../components/Header';
-import { titleLimiter } from '../../../utils';
 
 export const ArtistsAlbums = ({ componentId, artistId, artistName }) => {
   const dispatch = useDispatch();
@@ -43,7 +42,7 @@ export const ArtistsAlbums = ({ componentId, artistId, artistName }) => {
 
   return (
     <View style={styles.container}>
-      <Header title={`${titleLimiter(artistName)} albums`} onPressBack={onPressBack} />
+      <Header title={artistName} onPressBack={onPressBack} />
       <FlatList
         testID={'albumList'}
         data={albums}

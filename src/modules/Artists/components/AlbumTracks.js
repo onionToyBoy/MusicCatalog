@@ -8,9 +8,13 @@ import { selectTracks } from '../selectors';
 import { getTracks } from '../thunks';
 import { Track } from './Track';
 import { Header } from '../../../components/Header';
-import { titleLimiter } from '../../../utils';
-import { setFavoriteAlbum, removeFavoriteAlbum, setFavoriteTrack, removeFavoriteTrack } from '../../Favorites/actions';
-import { selectFavorites } from '../../Favorites/selectors';
+import {
+  setFavoriteAlbum,
+  removeFavoriteAlbum,
+  setFavoriteTrack,
+  removeFavoriteTrack,
+} from '../../Favorites/actions';
+import { selectFavoriteAlbums } from '../../Favorites/selectors';
 import { FavoritesAlert } from '../../Favorites/components/FavoritesAlert';
 
 export const AlbumTracks = ({
@@ -26,7 +30,7 @@ export const AlbumTracks = ({
   const dispatch = useDispatch();
 
   const tracks = useSelector(selectTracks(albumId));
-  const favorites = useSelector(selectFavorites);
+  const favoriteAlbum = useSelector(selectFavoriteAlbums(albumId));
 
   const albumInfo = {
     collectionId: albumId,
@@ -69,27 +73,18 @@ export const AlbumTracks = ({
   };
 
   const onPressStar = () => {
-    if (favorites.hasOwnProperty(albumId)) {
+    if (favoriteAlbum) {
       dispatch(removeFavoriteAlbum(albumId));
     } else {
       dispatch(setFavoriteAlbum(albumId, tracks, albumInfo));
     }
   };
 
-  const getSelectedTrack = trackId => {
-    if (trackId !== '') {
-      const selectedTrack = tracks.find(track => track.trackId === trackId);
-      return selectedTrack;
-    }
-  };
+  const getSelectedTrack = trackId =>
+    trackId !== '' && tracks.find(track => track.trackId === trackId);
 
   const addOrRemoveTrack = () => {
-    if (favorites.hasOwnProperty(albumId)) {
-      if (favorites[albumId].tracks.find(track => track.trackId === selectedTrackId)) {
-        return true;
-      }
-    }
-    return false;
+    return favoriteAlbum && favoriteAlbum.tracks.find(track => track.trackId === selectedTrackId);
   };
 
   const action = favoriteStatus => {
@@ -106,10 +101,10 @@ export const AlbumTracks = ({
   return (
     <View style={styles.container}>
       <Header
-        title={titleLimiter(collectionName)}
+        title={collectionName}
         onPressBack={onPressBack}
         onPressStar={onPressStar}
-        isFavorite={favorites.hasOwnProperty(albumId)}
+        isFavorite={favoriteAlbum}
       />
       <FavoritesAlert
         animation={animation}
