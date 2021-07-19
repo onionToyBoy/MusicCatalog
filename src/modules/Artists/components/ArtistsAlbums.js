@@ -19,12 +19,12 @@ export const ArtistsAlbums = ({ componentId, artistId, artistName }) => {
     dispatch(getAlbums(artistId));
   }, [dispatch, artistId]);
 
-  const onOpenTracks = (albumName, id, collectionPrice, artworkUrl60) => {
+  const onOpenTracks = (albumName, collectionId, collectionPrice, artworkUrl60) => {
     Navigation.push(componentId, {
       component: {
         name: routes.AlbumTracks,
         passProps: {
-          albumId: id,
+          albumId: collectionId,
           collectionName: albumName,
           collectionPrice,
           artworkUrl60,

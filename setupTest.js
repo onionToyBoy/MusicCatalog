@@ -11,6 +11,7 @@ configure({ adapter: new Adapter() });
 jest.mock('react-native-navigation', () => ({
   Navigation: {
     push: jest.fn(() => {}),
+    pop: jest.fn(() => {}),
   },
 }));
 

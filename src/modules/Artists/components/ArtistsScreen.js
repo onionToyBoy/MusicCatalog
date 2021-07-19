@@ -27,13 +27,13 @@ export const ArtistsScreen = ({ componentId }) => {
     dispatch(searchArtist(searchValue));
   }, [searchValue, dispatch]);
 
-  const onOpenAlbum = (name, id) => {
+  const onOpenAlbum = (artistName, artistId) => {
     Navigation.push(componentId, {
       component: {
         name: routes.ArtistsAlbums,
         passProps: {
-          artistId: id,
-          artistName: name,
+          artistId,
+          artistName,
         },
       },
     });

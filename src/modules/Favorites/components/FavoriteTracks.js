@@ -38,7 +38,6 @@ export const FavoriteTracks = ({ componentId, albumId, collectionName }) => {
         onPressStar={onPressStar}
       />
       <FlatList
-        testID={'trackList'}
         data={getFavoriteTracks()}
         keyExtractor={item => item.trackId}
         renderItem={renderTracks}

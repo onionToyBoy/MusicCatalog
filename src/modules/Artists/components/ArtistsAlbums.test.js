@@ -7,10 +7,20 @@ import * as SelectorsModule from '../selectors';
 import { routes } from '../../../constants/routes';
 
 describe('ArtistsAlbums test', () => {
-  const props = { componentId: '1234', artistId: '4321' };
+  const props = { componentId: '1234', artistId: '4321', artistName: 'Freez' };
   const albums = [
-    { albumName: 'The fat of the land', collectionId: 15 },
-    { albumName: 'The day is my enemy', collectionId: 19 },
+    {
+      albumName: 'The fat of the land',
+      collectionId: 15,
+      collectionPrice: 3.32,
+      artworkUrl60: '/dsds/refdff/com',
+    },
+    {
+      albumName: 'The day is my enemy',
+      collectionId: 19,
+      collectionPrice: 4.12,
+      artworkUrl60: 'haha/bebe.ua',
+    },
   ];
 
   afterEach(() => {
@@ -40,27 +50,25 @@ describe('ArtistsAlbums test', () => {
   });
 
   test('onOpenAlbum should calls Navigation', () => {
-    const { albumName, collectionId } = albums[0];
+    const { albumName, collectionId, collectionPrice, artworkUrl60 } = albums[0];
+    const { artistName } = props;
 
     const navigationOptions = {
       component: {
         name: routes.AlbumTracks,
         passProps: {
           albumId: collectionId,
-        },
-        options: {
-          topBar: {
-            title: {
-              text: albumName,
-            },
-          },
+          collectionName: albumName,
+          collectionPrice,
+          artworkUrl60,
+          artistName,
         },
       },
     };
 
     const wrapper = shallow(<ArtistsAlbums {...props} />);
     const album = wrapper.find({ testID: 'albumList' }).prop('renderItem')?.({ item: albums[0] });
-    album.props.onOpenTracks(albumName, collectionId);
+    album.props.onOpenTracks(albumName, collectionId, collectionPrice, artworkUrl60);
 
     expect(Navigation.push).toHaveBeenCalledWith(props.componentId, navigationOptions);
   });
