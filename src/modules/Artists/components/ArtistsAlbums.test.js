@@ -4,6 +4,7 @@ import { Navigation } from 'react-native-navigation';
 
 import { ArtistsAlbums } from './ArtistsAlbums';
 import * as SelectorsModule from '../selectors';
+import * as FavoritesSelectors from '../../Favorites/selectors';
 import { routes } from '../../../constants/routes';
 
 describe('ArtistsAlbums test', () => {
@@ -23,12 +24,20 @@ describe('ArtistsAlbums test', () => {
     },
   ];
 
+  const favoriteAlbum = {
+    album: { collectionId: 1 },
+    tracks: [{}, {}],
+  };
+
   afterEach(() => {
     Navigation.push.mockClear();
   });
 
   beforeEach(() => {
     jest.spyOn(SelectorsModule, 'selectAlbums').mockImplementation(() => () => albums);
+    jest
+      .spyOn(FavoritesSelectors, 'selectFavoriteAlbums')
+      .mockImplementation(() => () => favoriteAlbum);
   });
 
   test('Renders FlatList with data correct', () => {
@@ -71,5 +80,12 @@ describe('ArtistsAlbums test', () => {
     album.props.onOpenTracks(albumName, collectionId, collectionPrice, artworkUrl60);
 
     expect(Navigation.push).toHaveBeenCalledWith(props.componentId, navigationOptions);
+  });
+
+  test('Should call Navigation.pop on press back', () => {
+    const wrapper = shallow(<ArtistsAlbums {...props} />);
+    wrapper.find('Header').prop('onPressBack')();
+
+    expect(Navigation.pop).toHaveBeenCalled();
   });
 });

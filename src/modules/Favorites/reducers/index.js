@@ -36,10 +36,10 @@ export const favoriteAlbumsReducer = (state = INITIAL_STATE, action) => {
       const addTrack = track => {
         if (state.favorites[action.payload.albumId]) {
           const tracks = state.favorites[action.payload.albumId].tracks;
-          tracks.push(track);
+          tracks.push(action.payload.track);
           return tracks;
         }
-        return [track];
+        return [action.payload.track];
       };
       const newFavorites = {
         ...state.favorites,

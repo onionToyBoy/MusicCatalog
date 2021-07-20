@@ -1,18 +1,26 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { Navigation } from 'react-native-navigation';
 
 import { AlbumTracks } from './AlbumTracks';
 import * as SelectorsModule from '../selectors';
+import * as FavoritesSelectors from '../../Favorites/selectors';
 
-describe('ArtistsAlbums test', () => {
+describe('AlbumsTrack test', () => {
   const albumId = '4321';
   const tracks = [
     { trackName: 'Pink', trackId: 1 },
     { trackName: 'Holy stain', trackId: 41 },
   ];
 
+  const album = {
+    album: { collectionId: 1 },
+    tracks: [{}, {}],
+  };
+
   beforeEach(() => {
     jest.spyOn(SelectorsModule, 'selectTracks').mockImplementation(() => () => tracks);
+    jest.spyOn(FavoritesSelectors, 'selectFavoriteAlbums').mockImplementation(() => () => album);
   });
 
   test('Renders FlatList with data correct', () => {
@@ -31,5 +39,12 @@ describe('ArtistsAlbums test', () => {
     expect(key).toEqual(trackId);
     expect(track.props.trackName).toEqual(trackName);
     expect(track.props.trackId).toEqual(trackId);
+  });
+
+  test('Should call Navigation.pop on press back', () => {
+    const wrapper = shallow(<AlbumTracks albumId={albumId} />);
+    wrapper.find('Header').prop('onPressBack')();
+
+    expect(Navigation.pop).toHaveBeenCalled();
   });
 });

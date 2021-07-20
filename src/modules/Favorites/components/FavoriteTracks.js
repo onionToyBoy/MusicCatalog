@@ -41,6 +41,7 @@ export const FavoriteTracks = ({ componentId, albumId, collectionName }) => {
         data={getFavoriteTracks()}
         keyExtractor={item => item.trackId}
         renderItem={renderTracks}
+        testID={'favoreteTracksList'}
       />
     </View>
   );

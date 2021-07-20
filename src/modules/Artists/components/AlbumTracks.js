@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { View, StyleSheet, FlatList, Animated } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 
@@ -42,31 +42,9 @@ export const AlbumTracks = ({
 
   useEffect(() => {
     dispatch(getTracks(albumId));
-  }, [dispatch, albumId, animation]);
+  }, [dispatch, albumId]);
 
-  const animation = useRef(new Animated.Value(0)).current;
-
-  const fadeIn = id => {
-    Animated.timing(animation, {
-      toValue: 1,
-      duration: 600,
-      useNativeDriver: true,
-    }).start();
-
-    setSelectedTrackId(id);
-  };
-
-  const fadeOut = () => {
-    Animated.timing(animation, {
-      toValue: 0,
-      duration: 400,
-      useNativeDriver: true,
-    }).start();
-
-    setSelectedTrackId('');
-  };
-
-  const renderTracks = ({ item }) => <Track {...item} fadeIn={fadeIn} />;
+  const renderTracks = ({ item }) => <Track {...item} setSelectedTrackId={setSelectedTrackId} />;
 
   const onPressBack = () => {
     Navigation.pop(componentId);
@@ -83,18 +61,18 @@ export const AlbumTracks = ({
   const getSelectedTrack = trackId =>
     trackId !== '' && tracks.find(track => track.trackId === trackId);
 
-  const addOrRemoveTrack = () => {
+  const checkFavoriteStatus = () => {
     return favoriteAlbum && favoriteAlbum.tracks.find(track => track.trackId === selectedTrackId);
   };
 
-  const action = favoriteStatus => {
+  const onPressActionButton = favoriteStatus => {
     if (favoriteStatus) {
       dispatch(removeFavoriteTrack(albumId, selectedTrackId));
-      fadeOut();
+      setSelectedTrackId('');
     } else {
       const track = getSelectedTrack(selectedTrackId);
       dispatch(setFavoriteTrack(albumId, albumInfo, track));
-      fadeOut();
+      setSelectedTrackId('');
     }
   };
 
@@ -107,10 +85,8 @@ export const AlbumTracks = ({
         isFavorite={favoriteAlbum}
       />
       <FavoritesAlert
-        animation={animation}
-        fadeOut={fadeOut}
-        action={action}
-        addOrRemoveTrack={addOrRemoveTrack}
+        onPressActionButton={onPressActionButton}
+        checkFavoriteStatus={checkFavoriteStatus}
         selectedTrackId={selectedTrackId}
         setSelectedTrackId={setSelectedTrackId}
       />

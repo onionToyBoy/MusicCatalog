@@ -4,10 +4,10 @@ import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { colors } from '../../../constants/colors';
 import { timeConventer } from '../../../utils';
 
-export const Track = ({ trackName, trackNumber, trackTimeMillis, fadeIn = false, trackId }) => {
+export const Track = ({ trackName, trackNumber, trackTimeMillis, setSelectedTrackId, trackId }) => {
   const convertedTime = timeConventer(trackTimeMillis);
 
-  const openAlert = () => fadeIn && fadeIn(trackId);
+  const openAlert = () => setSelectedTrackId && setSelectedTrackId(trackId);
 
   return (
     <TouchableOpacity style={styles.container} onLongPress={openAlert}>

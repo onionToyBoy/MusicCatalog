@@ -1,49 +1,38 @@
 import React from 'react';
-import { View, StyleSheet, Animated, Text, TouchableOpacity, Modal } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, Modal } from 'react-native';
 
 import { colors } from '../../../constants/colors';
 
 export const FavoritesAlert = ({
-  animation,
-  fadeOut,
-  action,
-  addOrRemoveTrack,
+  onPressActionButton,
+  checkFavoriteStatus,
   selectedTrackId,
+  setSelectedTrackId,
 }) => {
-  const actionWord = addOrRemoveTrack() ? 'Remove' : 'Add';
+  const actionWord = checkFavoriteStatus() ? 'Remove' : 'Add';
 
-  const onAction = () => action(addOrRemoveTrack());
+  const onAction = () => onPressActionButton(checkFavoriteStatus());
+  const onCancel = () => setSelectedTrackId('');
 
   return (
     <Modal
       animationType='slide'
       transparent={true}
       visible={!!selectedTrackId}
-      onRequestClose={() => {
-        fadeOut();
-      }}
+      onRequestClose={onCancel}
     >
       <View style={styles.modalContainer}>
-        <Animated.View
-          style={[
-            styles.fadingContainer,
-            {
-              opacity: animation,
-            },
-          ]}
-        >
-          <View>
-            <Text style={styles.text}>Do you want to {actionWord} this track in favorites?</Text>
-          </View>
+        <View style={styles.fadingContainer}>
+          <Text style={styles.text}>Do you want to {actionWord} this track in favorites?</Text>
           <View style={styles.buttonsContainer}>
             <TouchableOpacity style={styles.button} onPress={onAction}>
               <Text style={styles.text}>{actionWord}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={fadeOut}>
+            <TouchableOpacity style={styles.button} onPress={onCancel}>
               <Text style={styles.text}>Cancel</Text>
             </TouchableOpacity>
           </View>
-        </Animated.View>
+        </View>
       </View>
     </Modal>
   );
