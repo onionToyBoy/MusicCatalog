@@ -8,12 +8,14 @@ import { ArtistsAlbums } from '../modules/Artists/components/ArtistsAlbums';
 import { AlbumTracks } from '../modules/Artists/components/AlbumTracks';
 import { FavoriteAlbums } from '../modules/Favorites/components/FavoriteAlbums';
 import { FavoriteTracks } from '../modules/Favorites/components/FavoriteTracks';
+import { CameraScreen } from '../components/CameraScreen';
 
 Navigation.registerComponent(routes.Artists, () => ReduxProvider(ArtistsScreen));
 Navigation.registerComponent(routes.FavoriteAlbums, () => ReduxProvider(FavoriteAlbums));
 Navigation.registerComponent(routes.ArtistsAlbums, () => ReduxProvider(ArtistsAlbums));
 Navigation.registerComponent(routes.AlbumTracks, () => ReduxProvider(AlbumTracks));
 Navigation.registerComponent(routes.FavoriteTracks, () => ReduxProvider(FavoriteTracks));
+Navigation.registerComponent(routes.CameraScreen, () => ReduxProvider(CameraScreen));
 
 Navigation.setDefaultOptions({
   statusBar: {
@@ -59,6 +61,22 @@ export const RootNavigation = () => {
                       options: {
                         bottomTab: {
                           text: 'Favorites',
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+            {
+              stack: {
+                children: [
+                  {
+                    component: {
+                      name: routes.CameraScreen,
+                      options: {
+                        bottomTab: {
+                          text: 'Camera',
                         },
                       },
                     },

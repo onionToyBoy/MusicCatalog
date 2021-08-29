@@ -4,4 +4,5 @@ export const routes = {
   ArtistsAlbums: 'ArtistsAlbums',
   AlbumTracks: 'AlbumTracks',
   FavoriteTracks: 'FavoriteTracks',
+  CameraScreen: 'CameraScreen',
 };
