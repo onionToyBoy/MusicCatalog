@@ -1,4 +1,4 @@
-import { selectArtists, selectAlbums, selectTracks } from '.';
+import { selectArtists, selectAlbums, selectTracks } from './index';
 
 describe('Artists selector', () => {
   const state = {

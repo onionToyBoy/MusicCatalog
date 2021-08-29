@@ -6,11 +6,11 @@ import { checkPrice } from '../../../utils';
 
 describe('Album test', () => {
   const collectionName = 'Kill em all';
+  const artworkUrl60 = 'iTunse.com/image';
+  const collectionPrice = 9.99;
 
   test('Props in Album component should be correct', () => {
     const artistName = 'Metallica';
-    const artworkUrl60 = 'iTunse.com/image';
-    const collectionPrice = 9.99;
 
     const wrapper = shallow(
       <Album
@@ -40,10 +40,17 @@ describe('Album test', () => {
         collectionName={collectionName}
         collectionId={collectionId}
         onOpenTracks={onOpenTracks}
+        artworkUrl60={artworkUrl60}
+        collectionPrice={collectionPrice}
       />,
     );
     wrapper.simulate('press');
 
-    expect(onOpenTracks).toHaveBeenCalledWith(collectionName, collectionId);
+    expect(onOpenTracks).toHaveBeenCalledWith(
+      collectionName,
+      collectionId,
+      collectionPrice,
+      artworkUrl60,
+    );
   });
 });

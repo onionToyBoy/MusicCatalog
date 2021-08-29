@@ -8,8 +8,9 @@ import { selectAlbums } from '../selectors';
 import { getAlbums } from '../thunks';
 import { Album } from '../../Albums/components/Album';
 import { routes } from '../../../constants/routes';
+import { Header } from '../../../components/Header';
 
-export const ArtistsAlbums = ({ componentId, artistId }) => {
+export const ArtistsAlbums = ({ componentId, artistId, artistName }) => {
   const dispatch = useDispatch();
 
   const albums = useSelector(selectAlbums(artistId));
@@ -18,28 +19,30 @@ export const ArtistsAlbums = ({ componentId, artistId }) => {
     dispatch(getAlbums(artistId));
   }, [dispatch, artistId]);
 
-  const onOpenTracks = (albumName, id) => {
+  const onOpenTracks = (albumName, collectionId, collectionPrice, artworkUrl60) => {
     Navigation.push(componentId, {
       component: {
         name: routes.AlbumTracks,
         passProps: {
-          albumId: id,
-        },
-        options: {
-          topBar: {
-            title: {
-              text: albumName,
-            },
-          },
+          albumId: collectionId,
+          collectionName: albumName,
+          collectionPrice,
+          artworkUrl60,
+          artistName,
         },
       },
     });
+  };
+
+  const onPressBack = () => {
+    Navigation.pop(componentId);
   };
 
   const renderAlbums = ({ item }) => <Album onOpenTracks={onOpenTracks} {...item} />;
 
   return (
     <View style={styles.container}>
+      <Header title={artistName} onPressBack={onPressBack} />
       <FlatList
         testID={'albumList'}
         data={albums}

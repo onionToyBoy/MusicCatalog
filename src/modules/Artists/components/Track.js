@@ -4,11 +4,13 @@ import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { colors } from '../../../constants/colors';
 import { timeConventer } from '../../../utils';
 
-export const Track = ({ trackName, trackNumber, trackTimeMillis }) => {
+export const Track = ({ trackName, trackNumber, trackTimeMillis, setSelectedTrackId, trackId }) => {
   const convertedTime = timeConventer(trackTimeMillis);
 
+  const openAlert = () => setSelectedTrackId && setSelectedTrackId(trackId);
+
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onLongPress={openAlert}>
       <View style={styles.leftContainer}>
         <Text testID={'number'} style={styles.numbers}>
           {trackNumber}

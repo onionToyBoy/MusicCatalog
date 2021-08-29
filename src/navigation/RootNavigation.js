@@ -3,34 +3,30 @@ import { Navigation } from 'react-native-navigation';
 import { colors } from '../constants/colors';
 import { routes } from '../constants/routes';
 import { ArtistsScreen } from '../modules/Artists/components/ArtistsScreen';
-import { AlbumsScreen } from '../modules/Albums/AlbumsScreen';
 import { ReduxProvider } from '../store/ReduxProvider';
 import { ArtistsAlbums } from '../modules/Artists/components/ArtistsAlbums';
 import { AlbumTracks } from '../modules/Artists/components/AlbumTracks';
+import { FavoriteAlbums } from '../modules/Favorites/components/FavoriteAlbums';
+import { FavoriteTracks } from '../modules/Favorites/components/FavoriteTracks';
+import { CameraScreen } from '../components/CameraScreen';
 
 Navigation.registerComponent(routes.Artists, () => ReduxProvider(ArtistsScreen));
-Navigation.registerComponent(routes.Albums, () => ReduxProvider(AlbumsScreen));
+Navigation.registerComponent(routes.FavoriteAlbums, () => ReduxProvider(FavoriteAlbums));
 Navigation.registerComponent(routes.ArtistsAlbums, () => ReduxProvider(ArtistsAlbums));
 Navigation.registerComponent(routes.AlbumTracks, () => ReduxProvider(AlbumTracks));
+Navigation.registerComponent(routes.FavoriteTracks, () => ReduxProvider(FavoriteTracks));
+Navigation.registerComponent(routes.CameraScreen, () => ReduxProvider(CameraScreen));
 
 Navigation.setDefaultOptions({
   statusBar: {
     backgroundColor: colors.PURPLE,
   },
   topBar: {
-    title: {
-      color: colors.WHITE,
-    },
-    backButton: {
-      color: colors.WHITE,
-    },
-    background: {
-      color: colors.PURPLE,
-    },
-    bottomTab: {
-      fontSize: 16,
-      selectedFontSize: 14,
-    },
+    height: 0,
+  },
+  bottomTab: {
+    fontSize: 14,
+    selectedFontSize: 16,
   },
 });
 
@@ -47,11 +43,6 @@ export const RootNavigation = () => {
                     component: {
                       name: routes.Artists,
                       options: {
-                        topBar: {
-                          title: {
-                            text: 'Artists',
-                          },
-                        },
                         bottomTab: {
                           text: 'Artists',
                         },
@@ -66,15 +57,26 @@ export const RootNavigation = () => {
                 children: [
                   {
                     component: {
-                      name: routes.Albums,
+                      name: routes.FavoriteAlbums,
                       options: {
-                        topBar: {
-                          title: {
-                            text: 'Albums',
-                          },
-                        },
                         bottomTab: {
-                          text: 'Albums',
+                          text: 'Favorites',
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+            {
+              stack: {
+                children: [
+                  {
+                    component: {
+                      name: routes.CameraScreen,
+                      options: {
+                        bottomTab: {
+                          text: 'Camera',
                         },
                       },
                     },

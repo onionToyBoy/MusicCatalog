@@ -5,6 +5,7 @@ import { Navigation } from 'react-native-navigation';
 
 import { ArtistsScreen } from './ArtistsScreen';
 import * as SelectorsModule from '../selectors';
+import { routes } from '../../../constants/routes';
 
 describe('ArtistsScreen test', () => {
   const componentId = '123';
@@ -85,9 +86,11 @@ describe('ArtistsScreen test', () => {
 
     const navigationOptions = {
       component: {
-        name: 'ArtistsAlbums',
-        options: { topBar: { title: { text: `${artistName} albums` } } },
-        passProps: { artistId },
+        name: routes.ArtistsAlbums,
+        passProps: {
+          artistId,
+          artistName,
+        },
       },
     };
 

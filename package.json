@@ -16,6 +16,7 @@
     "jest-react-hooks-shallow": "^1.5.1",
     "react": "^16.14.0",
     "react-native": "0.64.1",
+    "react-native-camera": "^4.0.0",
     "react-native-navigation": "^7.14.0",
     "react-redux": "^7.2.4",
     "redux": "^4.1.0"

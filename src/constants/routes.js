@@ -1,7 +1,8 @@
 export const routes = {
   Artists: 'Artists',
-  Albums: 'Albums',
+  FavoriteAlbums: 'FavoriteAlbums',
   ArtistsAlbums: 'ArtistsAlbums',
   AlbumTracks: 'AlbumTracks',
-  FavoriteButton: 'FavoriteButton',
+  FavoriteTracks: 'FavoriteTracks',
+  CameraScreen: 'CameraScreen',
 };
